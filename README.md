@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/galaxyhaxz/devilution.svg?branch=master)](https://travis-ci.org/galaxyhaxz/devilution)
+
 # Devilution
 Diablo devolved - magic behind the 1996 computer game
 
@@ -26,10 +28,17 @@ Building with Visual C++ 5.10
 - Make sure Service Pack 3 is installed in order to update the linker from 5.00 -> 5.10! Newer versions of Visual Studio work as well, but will upgrade the project.
 - Open the project workspace `Diablo.dsw` and select `Build Diablo.exe`. This will build all dependencies and only takes a few seconds.
 
+Building with modern version of Visual Studio
+- Make sure to disable Data Exection Prevention: Configuration options -> Linker -> Advanced -> Data Execution Prevention (DEP).
+- Set this value to: No (/NXCOMPAT: NO).
+- Storm.dll uses dynamic compilation to improve rendering performance but fails to mark the resulting memory page as executable, leading to a protection fault when trying to draw.
+
+
+
 Building with MinGW(32/64)
-- Ensure that the MinGW binary paths have been added to the command line.
-- For MinGW32, navigate to the project root and execute `mingw32-make -f Makefile32`. The process will take longer than Visual Studio.
-- For MinGW64, refer to the respective documentation: [Linux](Support/INSTALL_linux.md) | [Windows](Support/INSTALL_windows.md). Note that only x86 systems may be targeted for the time being.
+- Ensure that the MinGW binary paths have been added to the command line. On Windows, you would usually type: `set PATH=C:\mingw\bin;C:\mingw\msys\1.0\bin`
+- For MinGW32, navigate to the project root and execute `make MINGW32=1`. The process will take longer than Visual Studio.
+- For MinGW64, refer to the respective documentation: [Linux](Support/INSTALL_linux.md) | [Windows](Support/INSTALL_windows.md) | [Mac](Support/INSTALL_mac.md). Note that only x86 systems may be targeted for the time being.
 
 Compiling Definitions
 - `COPYPROT` (default: on) will define whether or not to use the CD drive for DIABDAT.MPQ
@@ -37,19 +46,19 @@ Compiling Definitions
 - `SLEEP` (default: off) will define whether to sleep the program to prevent 100% CPU usage
 - `_DEBUG` (default: off) will define whether to include debug features (refer to [Debugging Document](Support/debug.md))
 
+# [Compatibility Matrix, Compilations, Platform Statuses](Support/compatibility_matrix.md)
+
 # Installing
 Once compiled, the Devilution binary will serve as a replacement for `Diablo.exe`. A clean installation of Diablo patched to 1.09(b) is needed to run the game. Either copy Devilution into Diablo's installation folder, or make sure the following files are present:
 - `DIABDAT.MPQ` : if `COPYPROT` was defined, then the Diablo CD will be required
 - `DiabloUI.dll` : provides module for the title screen interface
 - `SmackW32.dll` : provides library for playing Smacker video files
+- `Standard.snp` : provides local multiplayer code (Modem/IPX/Serial, Starcraft version adds TCP/IP)
 - `Storm.dll` : provides various "standard" functions
 
 To run the game in windowed mode, a DirectDraw wrapper will be needed. Strange Bytes' [DirectDraw patch](http://www.strangebytes.com/index.php/projects/1-diablo-1-windows-7-vista-patch) is recommended. To install, place the `ddraw.dll` into the same location as the Devilution binary.
 
-# Troubleshooting
-While Devilution should produce a binary close to the original (compatible with Windows 95/NT), it may cause issues on newer systems. It has been reported to frequently crash on some setups, although for many it appears to be running flawless otherwise. Windows 7, Linux-WINE, and Windows 10 have all reported success.
-
-Note that newer compilers may need to be tweaked to properly produce an executable. Currently this is being worked on to provide multiple Makefiles for a variety of systems. To ensure the best results, either MinGW or Visual Studio 2003/older should be used for the time being.
+# [Troubleshooting](Support/troubleshooting.md)
 
 # F.A.Q.
 > Wow, does this mean I can download and play Diablo for free now?

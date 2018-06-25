@@ -1,32 +1,55 @@
-DIABLO_SRC=$(wildcard Source/*.cpp)
-DIABLO_OBJ=$(DIABLO_SRC:.cpp=.o)
+# mingw32 and mingw64 have different executables
+ifdef MINGW32
+	CXX=mingw32-g++
+	DLLTOOL=dlltool
+	WINDRES=windres
+else
+	CXX=i686-w64-mingw32-g++
+	DLLTOOL=i686-w64-mingw32-dlltool
+	WINDRES=i686-w64-mingw32-windres
+endif
 
-PKWARE_SRC=$(wildcard 3rdParty/PKWare/*.cpp)
-PKWARE_OBJ=$(PKWARE_SRC:.cpp=.o)
+# Clang doesn't understand permissive compilation, we need to "fix" invalid
+# casts from a pointer type there using
+#     static_cast<NEW_TYPE>(reinterpret_cast<uintptr_t>(ptr))
+# instead of
+#     (NEW_TYPE)(ptr)
+CXXFLAGS=-fpermissive -Wno-write-strings
+CPPFLAGS=-MMD -MF $*.d
+LDLIBS=-lgdi32 -lversion -ldiabloui -lstorm
+LDFLAGS=-L./ -static-libgcc -mwindows
 
 all: devilution.exe
 
-devilution.exe: $(DIABLO_OBJ) $(PKWARE_OBJ) DiabloUI.lib Storm.lib
-	i686-w64-mingw32-gcc -L./ -o $@ $^ -lgdi32 -lversion -ldiabloui -lstorm
+debug: CXXFLAGS += -D_DEBUG
+debug: CPPFLAGS += -D_DEBUG
+debug: devilution.exe
 
-%.o: %.cpp
-	i686-w64-mingw32-gcc -c -fpermissive -o $@ $<
+DIABLO_SRC=$(wildcard Source/*.cpp)
+OBJS=$(DIABLO_SRC:.cpp=.o)
 
-DiabloUI.lib: DiabloUI.dll DiabloUI/diabloui_gcc.def
-	i686-w64-mingw32-dlltool -d DiabloUI/diabloui_gcc.def -D DiabloUI.dll -l DiabloUI.lib
+PKWARE_SRC=$(wildcard 3rdParty/PKWare/*.cpp)
+PKWARE_OBJS=$(PKWARE_SRC:.cpp=.o)
 
-DiabloUI.dll:
-	echo "Please copy DiabloUI.dll (version 1.09b) here."
-	exit 1
+devilution.exe: $(OBJS) $(PKWARE_OBJS) diabres.o diabloui.lib storm.lib
+	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
-Storm.lib: Storm.dll 3rdParty/Storm/Source/storm_gcc.def
-	i686-w64-mingw32-dlltool -d 3rdParty/Storm/Source/storm_gcc.def -D Storm.dll -l Storm.lib
+diabres.o: Diablo.rc
+	$(WINDRES) $< $@
 
-Storm.dll:
-	echo "Please copy Storm.dll (version 1.09b) here."
-	exit 1
+diabloui.lib: diabloui.dll DiabloUI/diabloui_gcc.def
+	$(DLLTOOL) -d DiabloUI/diabloui_gcc.def -D $< -l $@
+
+diabloui.dll:
+#	$(error Please copy diabloui.dll (version 1.09[b]) here)
+
+storm.lib: storm.dll 3rdParty/Storm/Source/storm_gcc.def
+	$(DLLTOOL) -d 3rdParty/Storm/Source/storm_gcc.def -D $< -l $@
+
+storm.dll:
+#	$(error Please copy storm.dll (version 1.09[b]) here)
 
 clean:
-	rm -f $(DIABLO_OBJ) $(PKWARE_OBJ)
+	@$(RM) -v $(OBJS) $(OBJS:.o=.d) $(PKWARE_OBJS) $(PKWARE_OBJS:.o=d) diabres.o storm.lib diabloui.lib devilution.exe
 
 .PHONY: clean all

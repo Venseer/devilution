@@ -347,7 +347,6 @@ void (__fastcall *AiProc[])(int i) =
   &MAI_Warlord
 };
 
-//----- (00430FE4) --------------------------------------------------------
 struct monster_cpp_init
 {
 	monster_cpp_init()
@@ -358,7 +357,6 @@ struct monster_cpp_init
 // 47F130: using guessed type int monster_inf;
 // 64CCE4: using guessed type int monster_cpp_init_value;
 
-//----- (00430FEF) --------------------------------------------------------
 void __fastcall InitMonsterTRN(int monst, int special)
 {
 	signed int i; // ecx
@@ -408,7 +406,6 @@ void __fastcall InitMonsterTRN(int monst, int special)
 	}
 }
 
-//----- (0043107B) --------------------------------------------------------
 void __cdecl InitLevelMonsters()
 {
 	int i; // eax
@@ -434,7 +431,6 @@ void __cdecl InitLevelMonsters()
 // 6599D9: using guessed type int END_Monsters_17;
 // 659AE8: using guessed type int monstimgtot;
 
-//----- (004310CF) --------------------------------------------------------
 int __fastcall AddMonsterType(int type, int placeflag)
 {
 	bool done; // eax
@@ -465,7 +461,6 @@ int __fastcall AddMonsterType(int type, int placeflag)
 }
 // 659AE8: using guessed type int monstimgtot;
 
-//----- (0043114F) --------------------------------------------------------
 void __cdecl GetLevelMTypes() /* note-decompile this function again and check */
 {
 	//int v0; // eax
@@ -608,7 +603,6 @@ void __cdecl GetLevelMTypes() /* note-decompile this function again and check */
 // 43114F: using guessed type int var_1C0[111];
 // 43114F: using guessed type int var_324[89];
 
-//----- (004313F9) --------------------------------------------------------
 void __fastcall InitMonsterGFX(int monst)
 {
 	int v1; // esi
@@ -774,7 +768,6 @@ void __fastcall InitMonsterGFX(int monst)
 }
 // 64CCE0: using guessed type int MissileFileFlag;
 
-//----- (004316AE) --------------------------------------------------------
 void __fastcall ClearMVars(int i)
 {
 	monster[i]._mVar1 = 0;
@@ -787,7 +780,6 @@ void __fastcall ClearMVars(int i)
 	monster[i]._mVar8 = 0;
 }
 
-//----- (004316E7) --------------------------------------------------------
 void __fastcall InitMonster(int i, int rd, int mtype, int x, int y)
 {
 	int v5; // ebx
@@ -854,7 +846,7 @@ void __fastcall InitMonster(int i, int rd, int mtype, int x, int y)
 	monster[v6]._mint = v17->mInt;
 	_LOBYTE(monster[v6]._pathcount) = 0;
 	monster[v6]._uniqtype = 0;
-	_LOBYTE(monster[v6]._msquelch) = 0;
+	monster[v6]._msquelch = 0;
 	_LOBYTE(monster[v6]._mgoal) = 1;
 	monster[v6]._mgoalvar1 = 0;
 	monster[v6]._mgoalvar2 = 0;
@@ -929,7 +921,6 @@ void __fastcall InitMonster(int i, int rd, int mtype, int x, int y)
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-//----- (00431A6B) --------------------------------------------------------
 void __cdecl ClrAllMonsters()
 {
 	int i; // edi
@@ -967,7 +958,6 @@ void __cdecl ClrAllMonsters()
 }
 // 67862C: using guessed type char gbActivePlayers;
 
-//----- (00431B10) --------------------------------------------------------
 bool __fastcall MonstPlace(int xp, int yp)
 {
 	if ( xp < 0 || xp >= 112
@@ -985,14 +975,12 @@ bool __fastcall MonstPlace(int xp, int yp)
 	}
 }
 
-//----- (00431B5D) --------------------------------------------------------
 void __fastcall PlaceMonster(int i, int mtype, int x, int y)
 {
 	dMonster[x][y] = i + 1;
 	InitMonster(i, random(90, 8), mtype, x, y);
 }
 
-//----- (00431B99) --------------------------------------------------------
 void __fastcall PlaceUniqueMonst(int uniqindex, int miniontype, int unpackfilesize)
 {
 	MonsterStruct *v3; // esi
@@ -1318,7 +1306,6 @@ LABEL_83:
 // 679660: using guessed type char gbMaxPlayers;
 // 6AAA64: using guessed type int zharlib;
 
-//----- (00432088) --------------------------------------------------------
 void __cdecl PlaceQuestMonsters()
 {
 	int skeltype; // esi
@@ -1404,7 +1391,6 @@ void __cdecl PlaceQuestMonsters()
 // 679660: using guessed type char gbMaxPlayers;
 // 6AAA64: using guessed type int zharlib;
 
-//----- (004322FA) --------------------------------------------------------
 void __fastcall PlaceGroup(int mtype, int num, unsigned char leaderf, int leader)
 {
 	int v4; // ecx
@@ -1543,7 +1529,6 @@ void __fastcall PlaceGroup(int mtype, int num, unsigned char leaderf, int leader
 }
 // 658550: using guessed type int totalmonsters;
 
-//----- (00432585) --------------------------------------------------------
 void __cdecl LoadDiabMonsts()
 {
 	unsigned char *lpSetPiece; // esi
@@ -1564,7 +1549,6 @@ void __cdecl LoadDiabMonsts()
 // 5289C4: using guessed type int diabquad1x;
 // 5289C8: using guessed type int diabquad1y;
 
-//----- (00432637) --------------------------------------------------------
 void __cdecl InitMonsters()
 {
 	int v0; // ebp
@@ -1732,7 +1716,6 @@ LABEL_42:
 // 679660: using guessed type char gbMaxPlayers;
 // 432637: using guessed type int var_1BC[111];
 
-//----- (0043283D) --------------------------------------------------------
 void __cdecl PlaceUniques()
 {
 	int v0; // edi
@@ -1811,7 +1794,6 @@ LABEL_23:
 	}
 }
 
-//----- (0043290E) --------------------------------------------------------
 void __fastcall SetMapMonsters(char *pMap, int startx, int starty)
 {
 	char *v3; // esi
@@ -1876,7 +1858,6 @@ void __fastcall SetMapMonsters(char *pMap, int startx, int starty)
 // 5CCB10: using guessed type char setlvlnum;
 // 5CF31D: using guessed type char setlevel;
 
-//----- (00432A4D) --------------------------------------------------------
 void __fastcall DeleteMonster(int i)
 {
 	int *v1; // ecx
@@ -1891,7 +1872,6 @@ void __fastcall DeleteMonster(int i)
 	*v1 = v3;
 }
 
-//----- (00432A71) --------------------------------------------------------
 int __fastcall AddMonster(int x, int y, int dir, int mtype, int InMap)
 {
 	int i; // esi
@@ -1905,7 +1885,6 @@ int __fastcall AddMonster(int x, int y, int dir, int mtype, int InMap)
 	return i;
 }
 
-//----- (00432AC1) --------------------------------------------------------
 void __fastcall NewMonsterAnim(int i, AnimStruct *anim, int md)
 {
 	MonsterStruct *v3; // eax
@@ -1924,7 +1903,6 @@ void __fastcall NewMonsterAnim(int i, AnimStruct *anim, int md)
 	v3->_mdir = md;
 }
 
-//----- (00432AFF) --------------------------------------------------------
 bool __fastcall M_Ranged(int i)
 {
 	char v1; // cl
@@ -1933,7 +1911,6 @@ bool __fastcall M_Ranged(int i)
 	return v1 == AI_SKELBOW || v1 == AI_GOATBOW || v1 == AI_SUCC || v1 == AI_LAZHELP;
 }
 
-//----- (00432B26) --------------------------------------------------------
 bool __fastcall M_Talker(int i)
 {
 	char v1; // cl
@@ -1948,7 +1925,6 @@ bool __fastcall M_Talker(int i)
 		|| v1 == AI_LAZHELP;
 }
 
-//----- (00432B5C) --------------------------------------------------------
 void __fastcall M_Enemy(int i)
 {
 	MonsterStruct *v1; // esi
@@ -2093,7 +2069,6 @@ LABEL_40:
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-//----- (00432E15) --------------------------------------------------------
 int __fastcall M_GetDir(int i)
 {
 	return GetDirection(
@@ -2103,7 +2078,6 @@ int __fastcall M_GetDir(int i)
 			   (unsigned char)monster[i]._menemyy);
 }
 
-//----- (00432E3D) --------------------------------------------------------
 void __fastcall M_CheckEFlag(int i)
 {
 	int v1; // ecx
@@ -2127,7 +2101,6 @@ LABEL_9:
 		monster[v1]._meflag = 0;
 }
 
-//----- (00432E9D) --------------------------------------------------------
 void __fastcall M_StartStand(int i, int md)
 {
 	int v2; // ebx
@@ -2163,7 +2136,6 @@ void __fastcall M_StartStand(int i, int md)
 	M_Enemy(v3);
 }
 
-//----- (00432F29) --------------------------------------------------------
 void __fastcall M_StartDelay(int i, int len)
 {
 	int v2; // eax
@@ -2179,7 +2151,6 @@ void __fastcall M_StartDelay(int i, int len)
 	}
 }
 
-//----- (00432F4F) --------------------------------------------------------
 void __fastcall M_StartSpStand(int i, int md)
 {
 	int v2; // ebx
@@ -2205,7 +2176,6 @@ void __fastcall M_StartSpStand(int i, int md)
 	M_CheckEFlag(v2);
 }
 
-//----- (00432FBC) --------------------------------------------------------
 void __fastcall M_StartWalk(int i, int xvel, int yvel, int xadd, int yadd, int EndDir)
 {
 	int v6; // ST18_4
@@ -2238,7 +2208,6 @@ void __fastcall M_StartWalk(int i, int xvel, int yvel, int xadd, int yadd, int E
 	M_CheckEFlag(v6);
 }
 
-//----- (0043308F) --------------------------------------------------------
 void __fastcall M_StartWalk2(int i, int xvel, int yvel, int a4, int a5, int a6, int a7, int EndDir)
 {
 	int v8; // esi
@@ -2288,7 +2257,6 @@ void __fastcall M_StartWalk2(int i, int xvel, int yvel, int a4, int a5, int a6, 
 	M_CheckEFlag(ia);
 }
 
-//----- (004331AA) --------------------------------------------------------
 void __fastcall M_StartWalk3(int i, int xvel, int yvel, int a4, int a5, int a6, int a7, int a8, int a9, int EndDir)
 {
 	int v10; // esi
@@ -2341,7 +2309,6 @@ void __fastcall M_StartWalk3(int i, int xvel, int yvel, int a4, int a5, int a6, 
 	M_CheckEFlag(ia);
 }
 
-//----- (004332F6) --------------------------------------------------------
 void __fastcall M_StartAttack(int i)
 {
 	int v1; // edi
@@ -2367,7 +2334,6 @@ void __fastcall M_StartAttack(int i)
 	M_CheckEFlag(v1);
 }
 
-//----- (00433367) --------------------------------------------------------
 void __fastcall M_StartRAttack(int i, int missile_type, int dam)
 {
 	int v3; // ebp
@@ -2397,7 +2363,6 @@ void __fastcall M_StartRAttack(int i, int missile_type, int dam)
 	M_CheckEFlag(v4);
 }
 
-//----- (004333EF) --------------------------------------------------------
 void __fastcall M_StartRSpAttack(int i, int missile_type, int dam)
 {
 	int v3; // ebp
@@ -2428,7 +2393,6 @@ void __fastcall M_StartRSpAttack(int i, int missile_type, int dam)
 	M_CheckEFlag(v4);
 }
 
-//----- (00433480) --------------------------------------------------------
 void __fastcall M_StartSpAttack(int i)
 {
 	int v1; // edi
@@ -2454,7 +2418,6 @@ void __fastcall M_StartSpAttack(int i)
 	M_CheckEFlag(v1);
 }
 
-//----- (004334F4) --------------------------------------------------------
 void __fastcall M_StartEat(int i)
 {
 	int v1; // edi
@@ -2477,7 +2440,6 @@ void __fastcall M_StartEat(int i)
 	M_CheckEFlag(v1);
 }
 
-//----- (0043355C) --------------------------------------------------------
 void __fastcall M_ClearSquares(int i)
 {
 	int v1; // edx
@@ -2526,7 +2488,6 @@ void __fastcall M_ClearSquares(int i)
 		dFlags[v1][v2 + 1] &= 0xEFu;
 }
 
-//----- (0043361B) --------------------------------------------------------
 void __fastcall M_GetKnockback(int i)
 {
 	int v1; // edi
@@ -2567,7 +2528,6 @@ void __fastcall M_GetKnockback(int i)
 	}
 }
 
-//----- (004336E5) --------------------------------------------------------
 void __fastcall M_StartHit(int i, int pnum, int dam)
 {
 	int v3; // ebx
@@ -2630,7 +2590,6 @@ void __fastcall M_StartHit(int i, int pnum, int dam)
 	}
 }
 
-//----- (0043385A) --------------------------------------------------------
 void __fastcall M_DiabloDeath(int i, unsigned char sendmsg)
 {
 	int v2; // esi
@@ -2663,7 +2622,7 @@ void __fastcall M_DiabloDeath(int i, unsigned char sendmsg)
 	for ( j = 0; j < nummonsters; ++j )
 	{
 		v5 = monstactive[v4];
-		if ( v5 != v15 && _LOBYTE(monster[v3]._msquelch) )
+		if ( v5 != v15 && monster[v3]._msquelch )
 		{
 			v6 = v5;
 			NewMonsterAnim(monstactive[v4], &monster[v5].MType->Anims[4], monster[v5]._mdir);
@@ -2706,7 +2665,6 @@ void __fastcall M_DiabloDeath(int i, unsigned char sendmsg)
 // 5256A0: using guessed type int gbProcessPlayers;
 // 64D32C: using guessed type int sgbSaveSoundOn;
 
-//----- (00433A4C) --------------------------------------------------------
 void __fastcall M2MStartHit(int mid, int i, int dam)
 {
 	int v3; // edi
@@ -2769,7 +2727,6 @@ void __fastcall M2MStartHit(int mid, int i, int dam)
 	}
 }
 
-//----- (00433BCC) --------------------------------------------------------
 void __fastcall MonstStartKill(int i, int pnum, unsigned char sendmsg)
 {
 	signed int v3; // edi
@@ -2840,7 +2797,6 @@ void __fastcall MonstStartKill(int i, int pnum, unsigned char sendmsg)
 		AddMissile(monster[v5]._mx, monster[v5]._my, 0, 0, 0, 59, 1, v3, (unsigned char)monster[v5]._mint + 1, 0);
 }
 
-//----- (00433DC2) --------------------------------------------------------
 void __fastcall M2MStartKill(int i, int mid)
 {
 	signed int v2; // ebx
@@ -2906,7 +2862,6 @@ void __fastcall M2MStartKill(int i, int mid)
 		AddMissile(monster[v4]._mx, monster[v4]._my, 0, 0, 0, 59, 1, v3, (unsigned char)monster[v4]._mint + 1, 0);
 }
 
-//----- (00433FC7) --------------------------------------------------------
 void __fastcall M_StartKill(int i, int pnum)
 {
 	int v2; // edi
@@ -2935,7 +2890,6 @@ void __fastcall M_StartKill(int i, int pnum)
 	MonstStartKill(v2, v3, 1u);
 }
 
-//----- (00434045) --------------------------------------------------------
 void __fastcall M_SyncStartKill(int i, int x, int y, int pnum)
 {
 	int v4; // esi
@@ -2971,7 +2925,6 @@ void __fastcall M_SyncStartKill(int i, int x, int y, int pnum)
 	}
 }
 
-//----- (004340E0) --------------------------------------------------------
 void __fastcall M_StartFadein(int i, int md, unsigned char backwards)
 {
 	int v3; // esi
@@ -3011,7 +2964,6 @@ void __fastcall M_StartFadein(int i, int md, unsigned char backwards)
 	}
 }
 
-//----- (004341AD) --------------------------------------------------------
 void __fastcall M_StartFadeout(int i, int md, unsigned char backwards)
 {
 	int v3; // ebx
@@ -3050,7 +3002,6 @@ void __fastcall M_StartFadeout(int i, int md, unsigned char backwards)
 	}
 }
 
-//----- (00434272) --------------------------------------------------------
 void __fastcall M_StartHeal(int i)
 {
 	int v1; // edi
@@ -3076,7 +3027,6 @@ void __fastcall M_StartHeal(int i)
 	monster[v2]._mVar1 = monster[v2]._mmaxhp / (16 * (random(v4, 5) + 4));
 }
 
-//----- (0043430A) --------------------------------------------------------
 void __fastcall M_ChangeLightOffset(int monst)
 {
 	int v1; // esi
@@ -3120,7 +3070,6 @@ void __fastcall M_ChangeLightOffset(int monst)
 	ChangeLightOff((unsigned char)monster[v2].mlid, v8, v9 * (v6 >> 3));
 }
 
-//----- (00434374) --------------------------------------------------------
 int __fastcall M_DoStand(int i)
 {
 	int v1; // edi
@@ -3148,7 +3097,6 @@ int __fastcall M_DoStand(int i)
 	return 0;
 }
 
-//----- (004343F3) --------------------------------------------------------
 int __fastcall M_DoWalk(int i)
 {
 	int v1; // ebx
@@ -3206,7 +3154,6 @@ int __fastcall M_DoWalk(int i)
 	return v3;
 }
 
-//----- (00434509) --------------------------------------------------------
 int __fastcall M_DoWalk2(int i)
 {
 	int v1; // ebp
@@ -3256,7 +3203,6 @@ int __fastcall M_DoWalk2(int i)
 	return v5;
 }
 
-//----- (004345FC) --------------------------------------------------------
 int __fastcall M_DoWalk3(int i)
 {
 	int v1; // ebp
@@ -3320,7 +3266,6 @@ int __fastcall M_DoWalk3(int i)
 	return v10;
 }
 
-//----- (00434722) --------------------------------------------------------
 void __fastcall M_TryM2MHit(int i, int mid, int hper, int mind, int maxd)
 {
 	int v5; // edi
@@ -3382,7 +3327,6 @@ LABEL_15:
 	}
 }
 
-//----- (0043482C) --------------------------------------------------------
 void __fastcall M_TryH2HHit(int i, int pnum, int Hit, int MinDam, int MaxDam)
 {
 	int v5; // esi
@@ -3614,7 +3558,6 @@ LABEL_23:
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-//----- (00434C3B) --------------------------------------------------------
 int __fastcall M_DoAttack(int i)
 {
 	int v1; // edi
@@ -3675,7 +3618,6 @@ int __fastcall M_DoAttack(int i)
 	return 1;
 }
 
-//----- (00434DBD) --------------------------------------------------------
 int __fastcall M_DoRAttack(int i)
 {
 	int v1; // ebx
@@ -3731,7 +3673,6 @@ int __fastcall M_DoRAttack(int i)
 	return 1;
 }
 
-//----- (00434EB2) --------------------------------------------------------
 int __fastcall M_DoRSpAttack(int i)
 {
 	int v1; // ebx
@@ -3788,7 +3729,6 @@ int __fastcall M_DoRSpAttack(int i)
 	return 1;
 }
 
-//----- (00434FC7) --------------------------------------------------------
 int __fastcall M_DoSAttack(int i)
 {
 	int v1; // ebx
@@ -3822,7 +3762,6 @@ int __fastcall M_DoSAttack(int i)
 	return 1;
 }
 
-//----- (0043507E) --------------------------------------------------------
 int __fastcall M_DoFadein(int i)
 {
 	int v1; // edi
@@ -3842,7 +3781,6 @@ int __fastcall M_DoFadein(int i)
 	return 1;
 }
 
-//----- (004350E3) --------------------------------------------------------
 int __fastcall M_DoFadeout(int i)
 {
 	int v1; // esi
@@ -3873,7 +3811,6 @@ int __fastcall M_DoFadeout(int i)
 	return 1;
 }
 
-//----- (00435165) --------------------------------------------------------
 int __fastcall M_DoHeal(int i)
 {
 	int v1; // esi
@@ -3917,7 +3854,6 @@ int __fastcall M_DoHeal(int i)
 	return 0;
 }
 
-//----- (004351F5) --------------------------------------------------------
 int __fastcall M_DoTalk(int i)
 {
 	int v1; // edi
@@ -4002,7 +3938,7 @@ int __fastcall M_DoTalk(int i)
 			quests[11]._qvar1 = 2;
 		if ( v9 == UniqMonst[4].mName && gbMaxPlayers != 1 )
 		{
-			_LOBYTE(monster[v2]._msquelch) = -1;
+			monster[v2]._msquelch = -1;
 			monster[v2].mtalkmsg = 0;
 			quests[15]._qvar1 = 6;
 			_LOBYTE(monster[v2]._mgoal) = 1;
@@ -4016,7 +3952,6 @@ int __fastcall M_DoTalk(int i)
 // 5CF334: using guessed type int setpc_w;
 // 679660: using guessed type char gbMaxPlayers;
 
-//----- (0043547A) --------------------------------------------------------
 void __fastcall M_Teleport(int i)
 {
 	int v1; // ebx
@@ -4099,7 +4034,6 @@ void __fastcall M_Teleport(int i)
 	}
 }
 
-//----- (004355BB) --------------------------------------------------------
 int __fastcall M_DoGotHit(int i)
 {
 	int v1; // edi
@@ -4117,7 +4051,6 @@ int __fastcall M_DoGotHit(int i)
 	return 1;
 }
 
-//----- (0043561E) --------------------------------------------------------
 void __fastcall M_UpdateLeader(int i)
 {
 	int v1; // edi
@@ -4143,7 +4076,6 @@ void __fastcall M_UpdateLeader(int i)
 	}
 }
 
-//----- (00435697) --------------------------------------------------------
 void __cdecl DoEnding()
 {
 	char v0; // al
@@ -4185,7 +4117,6 @@ void __cdecl DoEnding()
 // 659AFC: using guessed type int loop_movie;
 // 679660: using guessed type char gbMaxPlayers;
 
-//----- (0043575C) --------------------------------------------------------
 void __cdecl PrepDoEnding()
 {
 	int *v0; // eax
@@ -4227,7 +4158,6 @@ void __cdecl PrepDoEnding()
 // 64D32C: using guessed type int sgbSaveSoundOn;
 // 679660: using guessed type char gbMaxPlayers;
 
-//----- (004357DF) --------------------------------------------------------
 int __fastcall M_DoDeath(int i)
 {
 	int v1; // edi
@@ -4288,7 +4218,6 @@ int __fastcall M_DoDeath(int i)
 	return 0;
 }
 
-//----- (004358EC) --------------------------------------------------------
 int __fastcall M_DoSpStand(int i)
 {
 	int v1; // ebx
@@ -4308,7 +4237,6 @@ int __fastcall M_DoSpStand(int i)
 	return 1;
 }
 
-//----- (0043596B) --------------------------------------------------------
 int __fastcall M_DoDelay(int i)
 {
 	int v1; // ebp
@@ -4344,7 +4272,6 @@ int __fastcall M_DoDelay(int i)
 	return 1;
 }
 
-//----- (00435A14) --------------------------------------------------------
 int __fastcall M_DoStone(int i)
 {
 	int v1; // esi
@@ -4364,7 +4291,6 @@ int __fastcall M_DoStone(int i)
 	return 0;
 }
 
-//----- (00435A62) --------------------------------------------------------
 void __fastcall M_WalkDir(int i, int md)
 {
 	int v2; // esi
@@ -4444,7 +4370,6 @@ LABEL_10:
 	}
 }
 
-//----- (00435BB5) --------------------------------------------------------
 void __fastcall GroupUnity(int i)
 {
 	int v1; // ebx
@@ -4500,11 +4425,11 @@ void __fastcall GroupUnity(int i)
 	if ( monster[v2].leaderflag == 1 )
 	{
 		v6 = v3;
-		if ( _LOBYTE(monster[v2]._msquelch) > _LOBYTE(monster[v3]._msquelch) )
+		if ( monster[v2]._msquelch > monster[v3]._msquelch )
 		{
 			monster[v6]._lastx = monster[v2]._mx;
 			monster[v6]._lasty = monster[v2]._my;
-			_LOBYTE(monster[v6]._msquelch) = _LOBYTE(monster[v2]._msquelch) - 1;
+			monster[v6]._msquelch = monster[v2]._msquelch - 1;
 		}
 		if ( monster[v6]._mAi == AI_GARG )
 		{
@@ -4529,11 +4454,11 @@ LABEL_18:
 				v11 = monstactive[j];
 				if ( monster[v11].leaderflag == 1 && (unsigned char)monster[v11].leader == v1 )
 				{
-					if ( _LOBYTE(monster[v2]._msquelch) > _LOBYTE(monster[v11]._msquelch) )
+					if ( monster[v2]._msquelch > monster[v11]._msquelch )
 					{
 						monster[v11]._lastx = monster[v2]._mx;
 						monster[v11]._lasty = monster[v2]._my;
-						_LOBYTE(monster[v11]._msquelch) = _LOBYTE(monster[v2]._msquelch) - 1;
+						monster[v11]._msquelch = monster[v2]._msquelch - 1;
 					}
 					if ( monster[v11]._mAi == AI_GARG )
 					{
@@ -4550,7 +4475,6 @@ LABEL_18:
 	}
 }
 
-//----- (00435DA8) --------------------------------------------------------
 bool __fastcall M_CallWalk(int i, int md)
 {
 	int v2; // esi
@@ -4640,7 +4564,6 @@ LABEL_20:
 	return 0;
 }
 
-//----- (00435EB5) --------------------------------------------------------
 bool __fastcall M_PathWalk(int i)
 {
 	int v1; // esi
@@ -4666,7 +4589,6 @@ bool __fastcall M_PathWalk(int i)
 	return 1;
 }
 
-//----- (00435F35) --------------------------------------------------------
 bool __fastcall M_CallWalk2(int i, int md)
 {
 	int v2; // esi
@@ -4719,7 +4641,6 @@ LABEL_10:
 	return 0;
 }
 
-//----- (00435FBA) --------------------------------------------------------
 bool __fastcall M_DumbWalk(int i, int md)
 {
 	int v2; // esi
@@ -4736,7 +4657,6 @@ bool __fastcall M_DumbWalk(int i, int md)
 	return v5;
 }
 
-//----- (00435FDB) --------------------------------------------------------
 bool __fastcall M_RoundWalk(int i, int md, int *dir)
 {
 	int *v3; // ebp
@@ -4794,7 +4714,6 @@ LABEL_12:
 	return v7;
 }
 
-//----- (004360B1) --------------------------------------------------------
 void __fastcall MAI_Zombie(int i)
 {
 	int v1; // esi
@@ -4866,7 +4785,6 @@ void __fastcall MAI_Zombie(int i)
 	}
 }
 
-//----- (004361F7) --------------------------------------------------------
 void __fastcall MAI_SkelSd(int i)
 {
 	int v1; // esi
@@ -4893,7 +4811,7 @@ void __fastcall MAI_SkelSd(int i)
 	if ( (unsigned int)i >= 0xC8 )
 		TermMsg("MAI_SkelSd: Invalid monster %d", i);
 	v2 = &monster[v1];
-	if ( v2->_mmode == MM_STAND && _LOBYTE(v2->_msquelch) )
+	if ( v2->_mmode == MM_STAND && v2->_msquelch )
 	{
 		v3 = v2->_mx;
 		v4 = v2->_my;
@@ -4943,7 +4861,6 @@ LABEL_16:
 	}
 }
 
-//----- (00436331) --------------------------------------------------------
 bool __fastcall MAI_Path(int i)
 {
 	int v1; // edi
@@ -4958,7 +4875,7 @@ bool __fastcall MAI_Path(int i)
 	v2 = &monster[v1];
 	if ( v2->MType->mtype != MT_GOLEM )
 	{
-		if ( !_LOBYTE(v2->_msquelch) )
+		if ( !v2->_msquelch )
 			return 0;
 		if ( v2->_mmode )
 			return 0;
@@ -4989,7 +4906,6 @@ bool __fastcall MAI_Path(int i)
 	return 0;
 }
 
-//----- (004363F9) --------------------------------------------------------
 void __fastcall MAI_Snake(int i)
 {
 	int esi1; // esi
@@ -5046,7 +4962,7 @@ void __fastcall MAI_Snake(int i)
 	pattern[1] = 1;
 	v3 = esi3->_mmode == 0;
 	micaster = esi3->_menemy;
-	if ( v3 && LOBYTE(esi3->_msquelch) )
+	if ( v3 && esi3->_msquelch )
 	{
 		v4 = esi3->_mx;
 		v5 = (unsigned char)esi3->_menemyy;
@@ -5191,7 +5107,6 @@ LABEL_46:
 	}
 }
 
-//----- (0043668F) --------------------------------------------------------
 void __fastcall MAI_Bat(int i)
 {
 	int esi1; // esi
@@ -5225,7 +5140,7 @@ void __fastcall MAI_Bat(int i)
 		TermMsg("MAI_Bat: Invalid monster %d", i);
 	esi3 = &monster[esi1];
 	micaster = esi3->_menemy;
-	if ( esi3->_mmode == MM_STAND && _LOBYTE(esi3->_msquelch) )
+	if ( esi3->_mmode == MM_STAND && esi3->_msquelch )
 	{
 		v3 = esi3->_mx;
 		v4 = esi3->_my;
@@ -5308,7 +5223,6 @@ void __fastcall MAI_Bat(int i)
 	}
 }
 
-//----- (004368F7) --------------------------------------------------------
 void __fastcall MAI_SkelBow(int i)
 {
 	int v1; // esi
@@ -5338,7 +5252,7 @@ void __fastcall MAI_SkelBow(int i)
 	if ( (unsigned int)i >= 0xC8 )
 		TermMsg("MAI_SkelBow: Invalid monster %d", i);
 	v2 = &monster[v1];
-	if ( v2->_mmode == MM_STAND && _LOBYTE(v2->_msquelch) )
+	if ( v2->_mmode == MM_STAND && v2->_msquelch )
 	{
 		v3 = v2->_mx - (unsigned char)v2->_menemyx;
 		v4 = v2->_my - (unsigned char)v2->_menemyy;
@@ -5382,7 +5296,6 @@ void __fastcall MAI_SkelBow(int i)
 	}
 }
 
-//----- (00436A38) --------------------------------------------------------
 void __fastcall MAI_Fat(int i)
 {
 	int v1; // esi
@@ -5403,7 +5316,7 @@ void __fastcall MAI_Fat(int i)
 	if ( (unsigned int)i >= 0xC8 )
 		TermMsg("MAI_Fat: Invalid monster %d", i);
 	v2 = &monster[v1];
-	if ( v2->_mmode == MM_STAND && _LOBYTE(v2->_msquelch) )
+	if ( v2->_mmode == MM_STAND && v2->_msquelch )
 	{
 		v3 = v2->_mx - (unsigned char)v2->_menemyx;
 		v4 = v2->_my - (unsigned char)v2->_menemyy;
@@ -5439,7 +5352,6 @@ void __fastcall MAI_Fat(int i)
 	}
 }
 
-//----- (00436B60) --------------------------------------------------------
 void __fastcall MAI_Sneak(int i)
 {
 	int v1; // edi
@@ -5545,7 +5457,6 @@ void __fastcall MAI_Sneak(int i)
 }
 // 642A14: using guessed type char lightmax;
 
-//----- (00436DC8) --------------------------------------------------------
 void __fastcall MAI_Fireman(int i)
 {
 	int esi1; // esi
@@ -5576,7 +5487,7 @@ void __fastcall MAI_Fireman(int i)
 	if ( (unsigned int)i >= 0xC8 )
 		TermMsg("MAI_Fireman: Invalid monster %d", i);
 	esi3 = esi1;
-	if ( monster[esi3]._mmode || !_LOBYTE(monster[esi3]._msquelch) )
+	if ( monster[esi3]._mmode || !monster[esi3]._msquelch )
 		return;
 	v3 = (unsigned char)monster[esi3]._menemyy;
 	micaster = monster[esi3]._menemy;
@@ -5663,7 +5574,6 @@ LABEL_29:
 	}
 }
 
-//----- (00436FEC) --------------------------------------------------------
 void __fastcall MAI_Fallen(int i)
 {
 	int v1; // edi
@@ -5698,7 +5608,7 @@ void __fastcall MAI_Fallen(int i)
 		else
 			_LOBYTE(monster[v3]._mgoal) = 1;
 	}
-	if ( monster[v3]._mmode == MM_STAND && _LOBYTE(monster[v3]._msquelch) )
+	if ( monster[v3]._mmode == MM_STAND && monster[v3]._msquelch )
 	{
 		if ( _LOBYTE(monster[v3]._mgoal) == 2 )
 		{
@@ -5775,7 +5685,6 @@ void __fastcall MAI_Fallen(int i)
 	}
 }
 
-//----- (004371D7) --------------------------------------------------------
 void __fastcall MAI_Cleaver(int i)
 {
 	int v1; // esi
@@ -5792,7 +5701,7 @@ void __fastcall MAI_Cleaver(int i)
 	if ( (unsigned int)i >= 0xC8 )
 		TermMsg("MAI_Cleaver: Invalid monster %d", i);
 	v2 = &monster[v1];
-	if ( v2->_mmode == MM_STAND && _LOBYTE(v2->_msquelch) )
+	if ( v2->_mmode == MM_STAND && v2->_msquelch )
 	{
 		v3 = v2->_mx;
 		v4 = v2->_my;
@@ -5809,7 +5718,6 @@ void __fastcall MAI_Cleaver(int i)
 	}
 }
 
-//----- (00437285) --------------------------------------------------------
 void __fastcall MAI_Round(int i, unsigned char special)
 {
 	int v2; // esi
@@ -5851,7 +5759,7 @@ void __fastcall MAI_Round(int i, unsigned char special)
 	if ( (unsigned int)i >= 0xC8 )
 		TermMsg("MAI_Round: Invalid monster %d", i);
 	v3 = &monster[v2];
-	if ( v3->_mmode == MM_STAND && _LOBYTE(v3->_msquelch) )
+	if ( v3->_mmode == MM_STAND && v3->_msquelch )
 	{
 		v4 = v3->_my;
 		v5 = v3->_mx;
@@ -5860,11 +5768,11 @@ void __fastcall MAI_Round(int i, unsigned char special)
 		v7 = v5 - v6;
 		v32 = v4 - v28;
 		md = GetDirection(v5, v4, v3->_lastx, v3->_lasty);
-		if ( _LOBYTE(v3->_msquelch) < 0xFFu )
+		if ( v3->_msquelch < 0xFFu ) /* check sign */
 			MonstCheckDoors(arglist);
 		_LOBYTE(v8) = 114;
 		v30 = random(v8, 100);
-		if ( (abs(v7) >= 2 || abs(v32) >= 2) && _LOBYTE(v3->_msquelch) == -1 )
+		if ( (abs(v7) >= 2 || abs(v32) >= 2) && v3->_msquelch == -1 )
 		{
 			v29 = &dung_map[v6][v28];
 			if ( dung_map[v3->_mx][v3->_my] == *v29 )
@@ -5943,13 +5851,11 @@ LABEL_26:
 	}
 }
 
-//----- (00437520) --------------------------------------------------------
 void __fastcall MAI_GoatMc(int i)
 {
 	MAI_Round(i, 1u);
 }
 
-//----- (00437528) --------------------------------------------------------
 void __fastcall MAI_Ranged(int i, int missile_type, unsigned char special)
 {
 	int v3; // edi
@@ -5989,7 +5895,7 @@ void __fastcall MAI_Ranged(int i, int missile_type, unsigned char special)
 			x2 = (unsigned char)monster[v4]._menemyx;
 			v9 = monster[v4]._mx - x2;
 			v20 = M_GetDir(arglist);
-			if ( _LOBYTE(monster[v4]._msquelch) < 0xFFu )
+			if ( monster[v4]._msquelch < 0xFFu ) /* check sign */
 				MonstCheckDoors(arglist);
 			v11 = monster[v4]._mVar1 == 10;
 			monster[v4]._mdir = v20;
@@ -6034,25 +5940,21 @@ void __fastcall MAI_Ranged(int i, int missile_type, unsigned char special)
 	}
 }
 
-//----- (004376B3) --------------------------------------------------------
 void __fastcall MAI_GoatBow(int i)
 {
 	MAI_Ranged(i, 0, 0);
 }
 
-//----- (004376BD) --------------------------------------------------------
 void __fastcall MAI_Succ(int i)
 {
 	MAI_Ranged(i, 24, 0);
 }
 
-//----- (004376C8) --------------------------------------------------------
 void __fastcall MAI_AcidUniq(int i)
 {
 	MAI_Ranged(i, 57, 1u);
 }
 
-//----- (004376D3) --------------------------------------------------------
 void __fastcall MAI_Scav(int i)
 {
 	int v1; // edi
@@ -6215,7 +6117,6 @@ LABEL_10:
 	}
 }
 
-//----- (00437957) --------------------------------------------------------
 void __fastcall MAI_Garg(int i)
 {
 	int v1; // ebp
@@ -6267,7 +6168,6 @@ void __fastcall MAI_Garg(int i)
 	}
 }
 
-//----- (00437A8B) --------------------------------------------------------
 void __fastcall MAI_RoundRanged(int i, int missile_type, unsigned char checkdoors, int dam, int lessmissiles)
 {
 	int v5; // esi
@@ -6311,7 +6211,7 @@ void __fastcall MAI_RoundRanged(int i, int missile_type, unsigned char checkdoor
 	if ( (unsigned int)i >= 0xC8 )
 		TermMsg("MAI_RoundRanged: Invalid monster %d", i);
 	v6 = &monster[v5];
-	if ( v6->_mmode == MM_STAND && _LOBYTE(v6->_msquelch) )
+	if ( v6->_mmode == MM_STAND && v6->_msquelch )
 	{
 		v7 = v6->_my;
 		y2 = (unsigned char)v6->_menemyy;
@@ -6320,7 +6220,7 @@ void __fastcall MAI_RoundRanged(int i, int missile_type, unsigned char checkdoor
 		v9 = v6->_mx - x2;
 		v33 = v7 - y2;
 		md = GetDirection(v6->_mx, v7, v6->_lastx, v6->_lasty);
-		if ( checkdoors && _LOBYTE(v6->_msquelch) < 0xFFu )
+		if ( checkdoors && v6->_msquelch < 0xFFu ) /* check sign */
 			MonstCheckDoors(arglist);
 		_LOBYTE(v10) = 121;
 		checkdoorsa = random(v10, 10000);
@@ -6333,7 +6233,7 @@ void __fastcall MAI_RoundRanged(int i, int missile_type, unsigned char checkdoor
 			if ( v14 < 2 )
 				goto LABEL_50;
 		}
-		if ( _LOBYTE(v6->_msquelch) != -1 )
+		if ( v6->_msquelch != -1 )
 			goto LABEL_50;
 		//v13 = y2;
 		if ( dung_map[v6->_mx][v6->_my] != dung_map[x2][y2] )
@@ -6426,31 +6326,26 @@ LABEL_28:
 	}
 }
 
-//----- (00437D93) --------------------------------------------------------
 void __fastcall MAI_Magma(int i)
 {
 	MAI_RoundRanged(i, 21, 1u, 4, 0);
 }
 
-//----- (00437DA2) --------------------------------------------------------
 void __fastcall MAI_Storm(int i)
 {
 	MAI_RoundRanged(i, 22, 1u, 4, 0);
 }
 
-//----- (00437DB1) --------------------------------------------------------
 void __fastcall MAI_Acid(int i)
 {
 	MAI_RoundRanged(i, 57, 0, 4, 1);
 }
 
-//----- (00437DC0) --------------------------------------------------------
 void __fastcall MAI_Diablo(int i)
 {
 	MAI_RoundRanged(i, 67, 0, 40, 0);
 }
 
-//----- (00437DCF) --------------------------------------------------------
 void __fastcall MAI_RR2(int i, int mistype, int dam)
 {
 	int v3; // ebx
@@ -6504,7 +6399,7 @@ void __fastcall MAI_RR2(int i, int mistype, int dam)
 		MAI_SkelSd(v3);
 		return;
 	}
-	if ( v4->_mmode == MM_STAND && _LOBYTE(v4->_msquelch) )
+	if ( v4->_mmode == MM_STAND && v4->_msquelch )
 	{
 		v6 = v4->_my;
 		y2 = (unsigned char)v4->_menemyy;
@@ -6513,7 +6408,7 @@ void __fastcall MAI_RR2(int i, int mistype, int dam)
 		v8 = v4->_mx - x2;
 		v36 = v6 - y2;
 		md = GetDirection(v4->_mx, v6, v4->_lastx, v4->_lasty);
-		if ( _LOBYTE(v4->_msquelch) < 0xFFu )
+		if ( v4->_msquelch < 0xFFu ) /* check sign */
 			MonstCheckDoors(arglist);
 		_LOBYTE(v9) = 121;
 		v38 = random(v9, 100);
@@ -6521,7 +6416,7 @@ void __fastcall MAI_RR2(int i, int mistype, int dam)
 		//v12 = v11;
 		if ( v10 >= 2 || (v13 = abs(v7), v13 >= 2) ) /* v12 = v14,  */
 		{
-			if ( _LOBYTE(v4->_msquelch) == -1 )
+			if ( v4->_msquelch == -1 )
 			{
 				//v12 = y2;
 				if ( dung_map[v4->_mx][v4->_my] == dung_map[x2][y2] )
@@ -6628,13 +6523,11 @@ LABEL_48:
 	}
 }
 
-//----- (004380DE) --------------------------------------------------------
 void __fastcall MAI_Mega(int i)
 {
 	MAI_RR2(i, 49, 0);
 }
 
-//----- (004380E9) --------------------------------------------------------
 void __fastcall MAI_Golum(int i)
 {
 	int v1; // edi
@@ -6646,7 +6539,7 @@ void __fastcall MAI_Golum(int i)
 	int v7; // ebx
 	int v8; // eax
 	char v9; // cl
-	int *v10; // eax
+	//char v10; // eax
 	signed int v11; // edx
 	signed int v12; // ecx
 	int v13; // eax
@@ -6694,11 +6587,10 @@ void __fastcall MAI_Golum(int i)
 					v8 = monster[v2]._menemy;
 					monster[v2]._menemyx = monster[v8]._mx;
 					v9 = monster[v8]._my;
-					v10 = &monster[v8]._msquelch;
 					monster[v2]._menemyy = v9;
-					if ( !*(_BYTE *)v10 )
+					if ( !monster[v8]._msquelch )
 					{
-						*(_BYTE *)v10 = -1;
+						monster[v8]._msquelch = -1;
 						monster[monster[v2]._menemy]._lastx = monster[v2]._mx;
 						v11 = 0;
 						monster[monster[v2]._menemy]._lasty = monster[v2]._my;
@@ -6707,11 +6599,12 @@ void __fastcall MAI_Golum(int i)
 							v12 = 0;
 							do
 							{
-								v13 = *(_DWORD *)&nTransTable[4
+								/* v13 = *(_DWORD *)&nTransTable[4
 															* (monster[v2]._my + v11 + 112 * (v12 + monster[v2]._mx))
-															+ 1148];
+															+ 1148]; check */
+								v13 = dMonster[monster[v2]._mx + v12 - 2][monster[v2]._my + v11 - 2];
 								if ( v13 > 0 )
-									_LOBYTE(monster[v13]._msquelch) = -1;
+									monster[v13]._msquelch = -1;
 								++v12;
 							}
 							while ( v12 < 5 );
@@ -6748,7 +6641,6 @@ void __fastcall MAI_Golum(int i)
 	}
 }
 
-//----- (00438304) --------------------------------------------------------
 void __fastcall MAI_SkelKing(int i)
 {
 	int v1; // esi
@@ -6795,7 +6687,7 @@ void __fastcall MAI_SkelKing(int i)
 	if ( (unsigned int)i >= 0xC8 )
 		TermMsg("MAI_SkelKing: Invalid monster %d", i);
 	v2 = &monster[v1];
-	if ( v2->_mmode == MM_STAND && _LOBYTE(v2->_msquelch) )
+	if ( v2->_mmode == MM_STAND && v2->_msquelch )
 	{
 		v3 = v2->_my;
 		y2 = (unsigned char)v2->_menemyy;
@@ -6804,11 +6696,11 @@ void __fastcall MAI_SkelKing(int i)
 		v5 = v2->_mx - x2;
 		v34 = v3 - y2;
 		md = GetDirection(v2->_mx, v3, v2->_lastx, v2->_lasty);
-		if ( _LOBYTE(v2->_msquelch) < 0xFFu )
+		if ( v2->_msquelch < 0xFFu ) /* check sign */
 			MonstCheckDoors(arglist);
 		_LOBYTE(v6) = 126;
 		v35 = random(v6, 100);
-		if ( (abs(v5) >= 2 || abs(v4) >= 2) && _LOBYTE(v2->_msquelch) == -1 )
+		if ( (abs(v5) >= 2 || abs(v4) >= 2) && v2->_msquelch == -1 )
 		{
 			v32 = &dung_map[x2][y2];
 			if ( dung_map[v2->_mx][v2->_my] == *v32 )
@@ -6914,7 +6806,6 @@ LABEL_26:
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-//----- (0043862D) --------------------------------------------------------
 void __fastcall MAI_Rhino(int i)
 {
 	int esi1; // esi
@@ -6958,7 +6849,7 @@ void __fastcall MAI_Rhino(int i)
 	if ( (unsigned int)i >= 0xC8 )
 		TermMsg("MAI_Rhino: Invalid monster %d", i);
 	esi3 = &monster[esi1];
-	if ( esi3->_mmode == MM_STAND && _LOBYTE(esi3->_msquelch) )
+	if ( esi3->_mmode == MM_STAND && esi3->_msquelch )
 	{
 		v3 = esi3->_my;
 		v2 = (unsigned char)esi3->_menemyy;
@@ -6967,7 +6858,7 @@ void __fastcall MAI_Rhino(int i)
 		v5 = esi3->_mx - v1;
 		v31 = v3 - v2;
 		midir = GetDirection(esi3->_mx, v3, esi3->_lastx, esi3->_lasty);
-		if ( _LOBYTE(esi3->_msquelch) < 0xFFu )
+		if ( esi3->_msquelch < 0xFFu ) /* check sign */
 			MonstCheckDoors(arglist);
 		_LOBYTE(v6) = -125;
 		v30 = random(v6, 100);
@@ -7079,7 +6970,6 @@ LABEL_23:
 	}
 }
 
-//----- (0043891F) --------------------------------------------------------
 void __fastcall MAI_Counselor(int i)
 {
 	int v1; // ebx
@@ -7127,7 +7017,7 @@ void __fastcall MAI_Counselor(int i)
 	if ( (unsigned int)i >= 0xC8 )
 		TermMsg("MAI_Counselor: Invalid monster %d", i);
 	v2 = v1;
-	if ( monster[v1]._mmode == MM_STAND && _LOBYTE(monster[v2]._msquelch) )
+	if ( monster[v1]._mmode == MM_STAND && monster[v2]._msquelch )
 	{
 		v3 = monster[v2]._mx;
 		x2 = (unsigned char)monster[v2]._menemyx;
@@ -7136,7 +7026,7 @@ void __fastcall MAI_Counselor(int i)
 		y2 = (unsigned char)monster[v2]._menemyy;
 		v6 = v5 - y2;
 		md = GetDirection(v3, v5, monster[v2]._lastx, monster[v2]._lasty);
-		if ( _LOBYTE(monster[v2]._msquelch) < 0xFFu )
+		if ( monster[v2]._msquelch < 0xFFu ) /* check sign */
 			MonstCheckDoors(v1);
 		_LOBYTE(v7) = 121;
 		v39 = random(v7, 100);
@@ -7166,7 +7056,7 @@ void __fastcall MAI_Counselor(int i)
 				v17 = abs(v4);
 			v18 = v17;
 			if ( abs(v4) < 2 && abs(v6) < 2
-			  || _LOBYTE(monster[v2]._msquelch) != -1
+			  || monster[v2]._msquelch != -1
 			  || dung_map[monster[v2]._mx][monster[v2]._my] != dung_map[x2][y2] )
 			{
 				v1 = arglist;
@@ -7260,7 +7150,6 @@ LABEL_29:
 	}
 }
 
-//----- (00438C79) --------------------------------------------------------
 void __fastcall MAI_Garbud(int i)
 {
 	int v1; // esi
@@ -7299,7 +7188,7 @@ void __fastcall MAI_Garbud(int i)
 				//_LOBYTE(v6) = effect_is_playing(USFX_GARBUD4);
 				if ( !effect_is_playing(USFX_GARBUD4) && _LOBYTE(monster[v2]._mgoal) == 7 )
 				{
-					_LOBYTE(monster[v2]._msquelch) = -1;
+					monster[v2]._msquelch = -1;
 					monster[v2].mtalkmsg = 0;
 					_LOBYTE(monster[v2]._mgoal) = 1;
 				}
@@ -7314,7 +7203,6 @@ void __fastcall MAI_Garbud(int i)
 	}
 }
 
-//----- (00438D7E) --------------------------------------------------------
 void __fastcall MAI_Zhar(int i)
 {
 	int v1; // ebp
@@ -7358,7 +7246,7 @@ void __fastcall MAI_Zhar(int i)
 				//_LOBYTE(v8) = effect_is_playing(USFX_ZHAR2);
 				if ( !effect_is_playing(USFX_ZHAR2) && _LOBYTE(monster[v2]._mgoal) == 7 )
 				{
-					_LOBYTE(monster[v2]._msquelch) = -1;
+					monster[v2]._msquelch = -1;
 					monster[v2].mtalkmsg = 0;
 					_LOBYTE(monster[v2]._mgoal) = 1;
 				}
@@ -7373,7 +7261,6 @@ void __fastcall MAI_Zhar(int i)
 	}
 }
 
-//----- (00438EC2) --------------------------------------------------------
 void __fastcall MAI_SnotSpil(int i)
 {
 	int v1; // ebp
@@ -7415,7 +7302,7 @@ void __fastcall MAI_SnotSpil(int i)
 					ObjChangeMap(setpc_x, setpc_y, setpc_w + setpc_x + 1, setpc_h + setpc_y + 1);
 					quests[7]._qvar1 = 3;
 					RedoPlayerVision();
-					_LOBYTE(monster[v2]._msquelch) = -1;
+					monster[v2]._msquelch = -1;
 					monster[v2].mtalkmsg = 0;
 					_LOBYTE(monster[v2]._mgoal) = 1;
 				}
@@ -7435,7 +7322,6 @@ void __fastcall MAI_SnotSpil(int i)
 // 5CF330: using guessed type int setpc_h;
 // 5CF334: using guessed type int setpc_w;
 
-//----- (00439016) --------------------------------------------------------
 void __fastcall MAI_Lazurus(int i)
 {
 	int v1; // ebx
@@ -7477,7 +7363,7 @@ void __fastcall MAI_Lazurus(int i)
 					{
 						ObjChangeMapResync(1, 18, 20, 24);
 						RedoPlayerVision();
-						_LOBYTE(monster[v2]._msquelch) = -1;
+						monster[v2]._msquelch = -1;
 						monster[v2].mtalkmsg = 0;
 						quests[15]._qvar1 = 6;
 						_LOBYTE(monster[v2]._mgoal) = 1;
@@ -7505,7 +7391,6 @@ LABEL_29:
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-//----- (00439196) --------------------------------------------------------
 void __fastcall MAI_Lazhelp(int i)
 {
 	int v1; // esi
@@ -7548,7 +7433,6 @@ LABEL_10:
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-//----- (00439253) --------------------------------------------------------
 void __fastcall MAI_Lachdanan(int i)
 {
 	int v1; // ebp
@@ -7591,7 +7475,6 @@ void __fastcall MAI_Lachdanan(int i)
 	}
 }
 
-//----- (00439338) --------------------------------------------------------
 void __fastcall MAI_Warlord(int i)
 {
 	int v1; // ebp
@@ -7620,7 +7503,7 @@ void __fastcall MAI_Warlord(int i)
 			//_LOBYTE(v6) = effect_is_playing(USFX_WARLRD1);
 			if ( !effect_is_playing(USFX_WARLRD1) && _LOBYTE(monster[v2]._mgoal) == 7 )
 			{
-				_LOBYTE(monster[v2]._msquelch) = -1;
+				monster[v2]._msquelch = -1;
 				monster[v2].mtalkmsg = 0;
 				_LOBYTE(monster[v2]._mgoal) = 1;
 			}
@@ -7634,7 +7517,6 @@ void __fastcall MAI_Warlord(int i)
 	}
 }
 
-//----- (00439419) --------------------------------------------------------
 void __cdecl DeleteMonsterList()
 {
 	int *v0; // eax
@@ -7671,7 +7553,6 @@ void __cdecl DeleteMonsterList()
 	}
 }
 
-//----- (0043947E) --------------------------------------------------------
 void __cdecl ProcessMonsters()
 {
 	int v0; // edi
@@ -7728,7 +7609,7 @@ void __cdecl ProcessMonsters()
 			}
 		}
 		v4 = &dFlags[monster[v1]._mx][monster[v1]._my];
-		if ( *v4 & 2 && !_LOBYTE(monster[v1]._msquelch) && monster[v1].MType->mtype == MT_CLEAVER )
+		if ( *v4 & 2 && !monster[v1]._msquelch && monster[v1].MType->mtype == MT_CLEAVER )
 			PlaySFX(USFX_CLEAVER);
 		if ( monster[v1]._mFlags & 0x10 )
 		{
@@ -7758,13 +7639,13 @@ void __cdecl ProcessMonsters()
 			{
 				v16 = monster[v1]._msquelch;
 				if ( v16 && monster[v1]._mAi != MT_DIABLO ) /* BUG_FIX: change '_mAi' to 'MType->mtype' */
-					_LOBYTE(monster[v1]._msquelch) = v16 - 1;
+					monster[v1]._msquelch = v16 - 1;
 			}
 			else
 			{
 				v14 = *(_DWORD *)v12;
 				v15 = *(_DWORD *)v13;
-				_LOBYTE(monster[v1]._msquelch) = -1;
+				monster[v1]._msquelch = -1;
 				monster[v1]._lastx = v14;
 				monster[v1]._lasty = v15;
 			}
@@ -7876,7 +7757,6 @@ LABEL_60:
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-//----- (004397C5) --------------------------------------------------------
 void __cdecl FreeMonsters()
 {
 	void **v0; // edi
@@ -7915,7 +7795,6 @@ void __cdecl FreeMonsters()
 	FreeMissiles2();
 }
 
-//----- (00439831) --------------------------------------------------------
 bool __fastcall DirOK(int i, int mdir)
 {
 	int v2; // ebx
@@ -8049,7 +7928,6 @@ LABEL_24:
 	return v26 == (unsigned char)monster[v4].unpackfilesize;
 }
 
-//----- (00439A32) --------------------------------------------------------
 bool __fastcall PosOkMissile(int x, int y)
 {
 	int v2; // ecx
@@ -8062,13 +7940,11 @@ bool __fastcall PosOkMissile(int x, int y)
 	return result;
 }
 
-//----- (00439A57) --------------------------------------------------------
 bool __fastcall CheckNoSolid(int x, int y)
 {
 	return nSolidTable[dPiece[0][y + 112 * x]] == 0;
 }
 
-//----- (00439A71) --------------------------------------------------------
 bool __fastcall LineClearF(bool (__fastcall *Clear)(int, int), int x1, int y1, int x2, int y2)
 {
 	int v5; // esi
@@ -8201,13 +8077,11 @@ LABEL_29:
 	return 0;
 }
 
-//----- (00439BE0) --------------------------------------------------------
 bool __fastcall LineClear(int x1, int y1, int x2, int y2)
 {
 	return LineClearF(PosOkMissile, x1, y1, x2, y2);
 }
 
-//----- (00439BFA) --------------------------------------------------------
 bool __fastcall LineClearF1(bool (__fastcall *Clear)(int, int, int), int monst, int x1, int y1, int x2, int y2)
 {
 	int v6; // esi
@@ -8338,7 +8212,6 @@ LABEL_29:
 	return 0;
 }
 
-//----- (00439D75) --------------------------------------------------------
 void __fastcall SyncMonsterAnim(int i)
 {
 	int v1; // esi
@@ -8420,7 +8293,6 @@ LABEL_13:
 	monster[v2]._mAnimLen = v12;
 }
 
-//----- (00439EA8) --------------------------------------------------------
 void __fastcall M_FallenFear(int x, int y)
 {
 	int v2; // eax
@@ -8502,7 +8374,6 @@ LABEL_16:
 	}
 }
 
-//----- (00439F92) --------------------------------------------------------
 void __fastcall PrintMonstHistory(int mt)
 {
 	int v1; // edi
@@ -8589,7 +8460,6 @@ void __fastcall PrintMonstHistory(int mt)
 // 4B8824: using guessed type int pinfoflag;
 // 679660: using guessed type char gbMaxPlayers;
 
-//----- (0043A13A) --------------------------------------------------------
 void __cdecl PrintUniqueHistory()
 {
 	char v0; // bl
@@ -8620,7 +8490,6 @@ LABEL_4:
 }
 // 4B8824: using guessed type int pinfoflag;
 
-//----- (0043A1C1) --------------------------------------------------------
 void __fastcall MissToMonst(int i, int x, int y)
 {
 	int v3; // edi
@@ -8757,7 +8626,6 @@ void __fastcall MissToMonst(int i, int x, int y)
 	}
 }
 
-//----- (0043A45E) --------------------------------------------------------
 bool __fastcall PosOkMonst(int i, int x, int y)
 {
 	int v3; // edi
@@ -8818,7 +8686,6 @@ LABEL_24:
 	return result;
 }
 
-//----- (0043A547) --------------------------------------------------------
 bool __fastcall PosOkMonst2(int i, int x, int y)
 {
 	int v3; // edi
@@ -8880,7 +8747,6 @@ LABEL_23:
 	return result;
 }
 
-//----- (0043A613) --------------------------------------------------------
 bool __fastcall PosOkMonst3(int i, int x, int y)
 {
 	int v3; // esi
@@ -8957,7 +8823,6 @@ LABEL_33:
 	return result;
 }
 
-//----- (0043A73B) --------------------------------------------------------
 bool __fastcall IsSkel(int mt)
 {
 	return mt >= MT_WSKELAX && mt <= MT_XSKELAX
@@ -8965,13 +8830,11 @@ bool __fastcall IsSkel(int mt)
 		|| mt >= MT_WSKELSD && mt <= MT_XSKELSD;
 }
 
-//----- (0043A760) --------------------------------------------------------
 bool __fastcall IsGoat(int mt)
 {
 	return mt >= MT_NGOATMC && mt <= MT_GGOATMC || mt >= MT_NGOATBW && mt <= MT_GGOATBW;
 }
 
-//----- (0043A77B) --------------------------------------------------------
 int __fastcall M_SpawnSkel(int x, int y, int dir)
 {
 	CMonster *v3; // ebx
@@ -9029,7 +8892,6 @@ int __fastcall M_SpawnSkel(int x, int y, int dir)
 	return v10;
 }
 
-//----- (0043A828) --------------------------------------------------------
 void __fastcall ActivateSpawn(int i, int x, int y, int dir)
 {
 	int v4; // eax
@@ -9045,7 +8907,6 @@ void __fastcall ActivateSpawn(int i, int x, int y, int dir)
 	M_StartSpStand(i, dir);
 }
 
-//----- (0043A879) --------------------------------------------------------
 bool __fastcall SpawnSkeleton(int ii, int x, int y)
 {
 	int v3; // esi
@@ -9142,7 +9003,6 @@ bool __fastcall SpawnSkeleton(int ii, int x, int y)
 }
 // 43A879: using guessed type int var_34[9];
 
-//----- (0043A979) --------------------------------------------------------
 int __cdecl PreSpawnSkeleton()
 {
 	int skeltypes; // edx
@@ -9178,7 +9038,6 @@ int __cdecl PreSpawnSkeleton()
 	return skel;
 }
 
-//----- (0043AA0C) --------------------------------------------------------
 void __fastcall TalktoMonster(int i)
 {
 	int v1; // esi
@@ -9219,7 +9078,6 @@ void __fastcall TalktoMonster(int i)
 	}
 }
 
-//----- (0043AADA) --------------------------------------------------------
 void __fastcall SpawnGolum(int i, int x, int y, int mi)
 {
 	int v4; // edi
@@ -9272,7 +9130,6 @@ void __fastcall SpawnGolum(int i, int x, int y, int mi)
 	}
 }
 
-//----- (0043AC0C) --------------------------------------------------------
 bool __fastcall CanTalkToMonst(int m)
 {
 	int v1; // esi
@@ -9290,7 +9147,6 @@ bool __fastcall CanTalkToMonst(int m)
 	return result;
 }
 
-//----- (0043AC43) --------------------------------------------------------
 bool __fastcall CheckMonsterHit(int m, bool *ret)
 {
 	int v2; // edi
@@ -9324,7 +9180,6 @@ bool __fastcall CheckMonsterHit(int m, bool *ret)
 	return result;
 }
 
-//----- (0043ACB5) --------------------------------------------------------
 int __fastcall encode_enemy(int m)
 {
 	int v1; // ecx
@@ -9337,7 +9192,6 @@ int __fastcall encode_enemy(int m)
 	return result;
 }
 
-//----- (0043ACCE) --------------------------------------------------------
 void __fastcall decode_enemy(int m, int enemy)
 {
 	int v2; // eax

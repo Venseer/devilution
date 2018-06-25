@@ -1,6 +1,7 @@
 //HEADER_GOES_HERE
+#ifndef __LIGHTING_H__
+#define __LIGHTING_H__
 
-//lighting
 extern LightListStruct VisionList[32];
 extern char lightactive[32];
 extern LightListStruct LightList[32];
@@ -23,6 +24,9 @@ void __fastcall DoVision(int nXPos, int nYPos, int nRadius, unsigned char doauto
 void __cdecl FreeLightTable();
 void __cdecl InitLightTable();
 void __cdecl MakeLightTable();
+#ifdef _DEBUG
+void __cdecl ToggleLighting();
+#endif
 void __cdecl InitLightMax();
 void __cdecl InitLighting();
 int __fastcall AddLight(int x, int y, int r);
@@ -47,3 +51,5 @@ extern void *pCrawlTable[19];
 extern unsigned char vCrawlTable[23][30];
 extern unsigned char byte_49463C[18][18];
 extern unsigned char RadiusAdj[23];
+
+#endif /* __LIGHTING_H__ */
