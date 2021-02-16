@@ -5,9 +5,9 @@
 int mainmenu_cpp_init_value; // weak
 char chr_name_str[16];
 
-int mainmenu_inf = 0x7F800000; // weak
+const int mainmenu_inf = 0x7F800000; // weak
 
-/* rdata */
+/* data */
 
 int menu_music_track_id = 5; // idb
 
@@ -136,7 +136,7 @@ void __fastcall mainmenu_action(int option)
 					goto LABEL_16;
 				case MAINMENU_ATTRACT_MODE:
 LABEL_10:
-					if ( window_activated )
+					if ( gbActive )
 						mainmenu_play_intro();
 					break;
 			}
@@ -149,7 +149,7 @@ LABEL_15:
 LABEL_16:
 	music_stop();
 }
-// 634980: using guessed type int window_activated;
+// 634980: using guessed type int gbActive;
 
 int __cdecl mainmenu_single_player()
 {

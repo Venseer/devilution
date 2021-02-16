@@ -6,13 +6,13 @@ extern int sgdwOwnerWait; // weak
 extern int msg_cpp_init_value; // weak
 extern int sgdwRecvOffset; // idb
 extern int sgnCurrMegaPlayer; // weak
-extern DLevel sgLevels[17];
+extern DLevel sgLevels[NUMLEVELS];
 extern char sbLastCmd; // weak
 extern TMegaPkt *sgpCurrPkt;
 extern char sgRecvBuf[4722];
 extern unsigned char sgbRecvCmd; // idb
-extern LocalLevel sgLocals[17];
-extern DJunk sgJunk[4];
+extern LocalLevel sgLocals[NUMLEVELS];
+extern DJunk sgJunk;
 extern TMegaPkt *sgpMegaPkt;
 extern char sgbDeltaChanged; // weak
 extern char sgbDeltaChunks; // weak
@@ -42,8 +42,8 @@ void __fastcall delta_monster_hp(int mi, int hp, unsigned char bLevel);
 void __fastcall delta_sync_monster(TCmdLocParam1 *packet, char level);
 void __fastcall delta_sync_golem(TCmdGolem *pG, int pnum, int bLevel);
 void __fastcall delta_leave_sync(unsigned char bLevel);
-bool __fastcall delta_portal_inited(int portal_num);
-bool __fastcall delta_quest_inited(int quest_num);
+bool __fastcall delta_portal_inited(int i);
+bool __fastcall delta_quest_inited(int i);
 void __fastcall DeltaAddItem(int ii);
 void __cdecl DeltaSaveLevel();
 void __cdecl DeltaLoadLevel();
@@ -158,8 +158,8 @@ int __fastcall On_NOVA(struct TCmdLoc *pCmd, int pnum);
 int __fastcall On_SETSHIELD(int unused, int pnum);
 int __fastcall On_REMSHIELD(int unused, int pnum);
 
-/* data */
+/* rdata */
 
-extern int msg_inf; // weak
+extern const int msg_inf; // weak
 
 #endif /* __MSG_H__ */

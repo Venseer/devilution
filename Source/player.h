@@ -8,7 +8,7 @@ extern char plr_gfx_flag; // weak
 extern int player_cpp_init_value; // weak
 extern int plr_aframe_size; // idb
 extern int myplr;
-extern PlayerStruct plr[4];
+extern PlayerStruct plr[MAX_PLRS];
 extern int plr_fframe_size; // idb
 extern int plr_qframe_size; // idb
 extern int deathflag; // idb
@@ -20,16 +20,16 @@ extern int deathdelay; // weak
 extern int plr_dframe_size; // idb
 
 void __cdecl player_cpp_init();
-void __fastcall player_init_cl2_hdrs(char *src, char *dst);
+void __fastcall SetPlayerGPtrs(char *pData, char *pAnim); /* unsigned char *+** */
 void __fastcall LoadPlrGFX(int pnum, int gfxflag);
 void __fastcall InitPlayerGFX(int pnum);
 void __fastcall InitPlrGFXMem(int pnum);
 int __fastcall GetPlrGFXSize(char *szCel);
 void __fastcall FreePlayerGFX(int pnum);
-void __fastcall NewPlrAnim(int pnum, int Peq, int numFrames, int Delay, int width);
+void __fastcall NewPlrAnim(int pnum, unsigned char *Peq, int numFrames, int Delay, int width);
 void __fastcall ClearPlrPVars(int pnum);
 void __fastcall SetPlrAnims(int pnum);
-void __fastcall ClearPlrRVars(PlayerStruct *pPlayer);
+void __fastcall ClearPlrRVars(PlayerStruct *p);
 void __fastcall CreatePlayer(int pnum, char c);
 int __fastcall CalcStatDiff(int pnum);
 void __fastcall NextPlrLevel(int pnum);
@@ -91,7 +91,7 @@ void __cdecl ValidatePlayer();
 void __cdecl ProcessPlayers();
 void __fastcall CheckCheatStats(int pnum);
 void __fastcall ClrPlrPath(int pnum);
-bool __fastcall PosOkPlayer(int pnum, int px, int py);
+BOOL __fastcall PosOkPlayer(int pnum, int px, int py);
 void __fastcall MakePlrPath(int pnum, int xx, int yy, unsigned char endspace);
 void __fastcall CheckPlrSpell();
 void __fastcall SyncPlrAnim(int pnum);
@@ -110,14 +110,14 @@ void __fastcall SetPlrVit(int pnum, int v);
 void __fastcall InitDungMsgs(int pnum);
 void __cdecl PlayDungMsgs();
 
-/* data */
-
-extern int player_inf;
-extern char ArmourChar[4];
-extern char WepChar[10];
-extern char CharChar[4];
-
 /* rdata */
+
+extern const int player_inf;
+extern const char ArmourChar[4];
+extern const char WepChar[10];
+extern const char CharChar[4];
+
+/* data */
 
 extern int plrxoff[9];
 extern int plryoff[9];
