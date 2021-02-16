@@ -7,7 +7,7 @@ void *pInvCels;
 int drawsbarflag; // idb
 int sgdwLastTime; // check name
 
-InvXY InvRect[73] =
+const InvXY InvRect[73] =
 {
   { 452, 31 },  // helmet
   { 480, 31 },  // helmet
@@ -84,7 +84,7 @@ InvXY InvRect[73] =
   { 408, 385 }  // belt
 };
 
-/* rdata */
+/* data */
 
 int AP2x2Tbl[10] = { 8, 28, 6, 26, 4, 24, 2, 22, 0, 20 }; // weak
 
@@ -2390,18 +2390,15 @@ LABEL_71:
 			switch ( v12 )
 			{
 				case UI_WARRIOR:
-					_LOBYTE(v5) = 0;
-					v13 = random(v5, 3) + PS_WARR14;
+					v13 = random(0, 3) + PS_WARR14;
 LABEL_84:
 					PlaySFX(v13);
 					break;
 				case UI_ROGUE:
-					_LOBYTE(v5) = 0;
-					v13 = random(v5, 3) + PS_ROGUE14;
+					v13 = random(0, 3) + PS_ROGUE14;
 					goto LABEL_84;
 				case UI_SORCERER:
-					_LOBYTE(v5) = 0;
-					v13 = random(v5, 3) + PS_MAGE14;
+					v13 = random(0, 3) + PS_MAGE14;
 					goto LABEL_84;
 			}
 		}
@@ -2505,17 +2502,17 @@ int __fastcall CanPut(int i, int j)
 	v7 = v6 < 0;
 	if ( v6 > 0 )
 	{
-		if ( _LOBYTE(object[v6-1]._oSelFlag) ) /* check */
+		if ( object[v6-1]._oSelFlag ) /* check */
 			return 0;
 		v7 = v6 < 0;
 	}
-	if ( v7 && _LOBYTE(object[-(v6 + 1)]._oSelFlag) )
+	if ( v7 && object[-(v6 + 1)]._oSelFlag )
 		return 0;
 	v8 = dObject[v2 + 1][j];
 	if ( v8 > 0 )
 	{
 		v9 = dObject[v2][j + 1];
-		if ( v9 > 0 && _LOBYTE(object[v8-1]._oSelFlag) && _LOBYTE(object[v9-1]._oSelFlag) )
+		if ( v9 > 0 && object[v8-1]._oSelFlag && object[v9-1]._oSelFlag )
 			return 0;
 	}
 	if ( !currlevel && (dMonster[0][v3] || dMonster[1][v3 + 1]) )
@@ -3017,7 +3014,7 @@ bool __cdecl UseScroll()
 	signed int v4; // esi
 	int *v5; // ecx
 
-	if ( pcurs != CURSOR_HAND || !leveltype && !*(_DWORD *)&spelldata[plr[myplr]._pRSpell].sTownSpell )
+	if ( pcurs != CURSOR_HAND || leveltype == DTYPE_TOWN && !*(_DWORD *)&spelldata[plr[myplr]._pRSpell].sTownSpell )
 		return 0;
 	v0 = myplr;
 	v1 = 0;

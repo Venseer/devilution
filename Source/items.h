@@ -2,21 +2,20 @@
 #ifndef __ITEMS_H__
 #define __ITEMS_H__
 
-extern int itemactive[127];
+extern int itemactive[MAXITEMS];
 extern int uitemflag;
-extern int itemavail[127];
+extern int itemavail[MAXITEMS];
 extern ItemStruct curruitem;
-extern ItemGetRecordStruct itemrecord[127];
-extern ItemStruct item[128];
-extern char itemhold[3][3];
-extern char byte_641234[28]; /* check if part of above */
-extern int Item2Frm[35];
+extern ItemGetRecordStruct itemrecord[MAXITEMS];
+extern ItemStruct item[MAXITEMS+1];
+extern int itemhold[3][3]; // BOOL
+extern unsigned char *Item2Frm[35];
 extern int UniqueItemFlag[128];
 extern int numitems;
 extern int gnNumGetRecords;
 
 void __cdecl InitItemGFX();
-bool __fastcall ItemPlace(int x, int y);
+bool __fastcall ItemPlace(int xp, int yp);
 void __cdecl AddInitItems();
 void __cdecl InitItems();
 void __fastcall CalcPlrItemVals(int p, bool Loadgfx);
@@ -126,13 +125,13 @@ void __fastcall NextItemRecord(int i);
 void __fastcall SetItemRecord(int dwSeed, int CI, int indx);
 void __fastcall PutItemRecord(int seed, int ci, int index);
 
-/* data */
-
-extern PLStruct PL_Prefix[84];
-extern PLStruct PL_Suffix[96];
-extern UItemStruct UniqueItemList[91];
-
 /* rdata */
+
+extern const PLStruct PL_Prefix[84];
+extern const PLStruct PL_Suffix[96];
+extern const UItemStruct UniqueItemList[91];
+
+/* data */
 
 
 extern ItemDataStruct AllItemsList[157];

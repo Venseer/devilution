@@ -2,14 +2,14 @@
 #ifndef __MISSILES_H__
 #define __MISSILES_H__
 
-extern int missileactive[125];
-extern int missileavail[125];
-extern MissileStruct missile[125];
+extern int missileactive[MAXMISSILES];
+extern int missileavail[MAXMISSILES];
+extern MissileStruct missile[MAXMISSILES];
 extern int nummissiles; // idb
 extern int ManashieldFlag;
-extern unk_missile_struct misflagstruct_unknown[125];
+extern ChainStruct chain[MAXMISSILES];
 extern int MissilePreFlag; // weak
-// int END_unkmis_126; // weak
+extern int numchains; // weak
 
 void __fastcall GetDamageAmt(int i, int *mind, int *maxd);
 int __fastcall CheckBlock(int fx, int fy, int tx, int ty);

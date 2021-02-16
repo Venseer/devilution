@@ -2,21 +2,20 @@
 
 #include "../types.h"
 
-int itemactive[127];
+int itemactive[MAXITEMS];
 int uitemflag;
-int itemavail[127];
+int itemavail[MAXITEMS];
 ItemStruct curruitem;
-ItemGetRecordStruct itemrecord[127];
-ItemStruct item[128];
-char itemhold[3][3];
-char byte_641234[28]; /* check if part of above */
-int Item2Frm[35];
+ItemGetRecordStruct itemrecord[MAXITEMS];
+ItemStruct item[MAXITEMS+1];
+int itemhold[3][3]; // BOOL
+unsigned char *Item2Frm[35];
 int UniqueItemFlag[128];
 int numitems;
 int gnNumGetRecords;
 
 
-PLStruct PL_Prefix[84] =
+const PLStruct PL_Prefix[84] =
 {
   { "Tin", IPL_TOHIT_CURSE, 6, 10, 3, PLT_WEAP|PLT_BOW|PLT_MISC, 0, 1, 0, 0, 0, -3 },
   { "Brass", IPL_TOHIT_CURSE, 1, 5, 1, PLT_WEAP|PLT_BOW|PLT_MISC, 0, 1, 0, 0, 0, -2 },
@@ -103,7 +102,7 @@ PLStruct PL_Prefix[84] =
   { "Lightning", IPL_LIGHTDAM, 2, 20, 18, PLT_WEAP|PLT_STAFF, 0, 0, 1, 10000, 10000, 2 },
   { &empty_string, IPL_INVALID, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
 };
-PLStruct PL_Suffix[96] =
+const PLStruct PL_Suffix[96] =
 {
   { "quality", IPL_DAMMOD, 1, 2, 2, PLT_WEAP|PLT_BOW, 0, 0, 1, 100, 200, 2 },
   { "maiming", IPL_DAMMOD, 3, 5, 7, PLT_WEAP|PLT_BOW, 0, 0, 1, 1300, 1500, 3 },
@@ -202,7 +201,7 @@ PLStruct PL_Suffix[96] =
   { "blocking", IPL_FASTBLOCK, 1, 1, 5, PLT_SHLD, 0, 0, 1, 4000, 4000, 4 },
   { &empty_string, IPL_INVALID, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
 };
-UItemStruct UniqueItemList[91] =
+const UItemStruct UniqueItemList[91] =
 {
   { "The Butcher's Cleaver", UITYPE_CLEAVER, 1u, 3u, 3650, IPL_STR, 10, 10, IPL_SETDAM, 4, 24, IPL_SETDUR, 10, 10, IPL_TOHIT, 0, 0, IPL_TOHIT, 0, 0, IPL_TOHIT, 0, 0 },
   { "The Undead Crown", UITYPE_SKCROWN, 1u, 3u, 16650, IPL_RNDSTEALLIFE, 0, 0, IPL_SETAC, 8, 8, IPL_INVCURS, 77, 0, IPL_TOHIT, 0, 0, IPL_TOHIT, 0, 0, IPL_TOHIT, 0, 0 },
@@ -297,7 +296,7 @@ UItemStruct UniqueItemList[91] =
   { &empty_string, UITYPE_INVALID, 0u, 0u, 0, IPL_TOHIT, 0, 0, IPL_TOHIT, 0, 0, IPL_TOHIT, 0, 0, IPL_TOHIT, 0, 0, IPL_TOHIT, 0, 0, IPL_TOHIT, 0, 0 }
 };
 
-/* rdata */
+/* data */
 
 
 ItemDataStruct AllItemsList[157] =
@@ -644,22 +643,22 @@ void __cdecl InitItemGFX()
 	do
 	{
 		sprintf(arglist, "Items\\%s.CEL", ItemDropStrs[v0]);
-		Item2Frm[v0] = (int)LoadFileInMem(arglist, 0);
+		Item2Frm[v0] = LoadFileInMem(arglist, 0);
 		++v0;
 	}
 	while ( v0 < 35 );
 	memset(UniqueItemFlag, 0, 0x200u);
 }
 
-bool __fastcall ItemPlace(int x, int y)
+bool __fastcall ItemPlace(int xp, int yp)
 {
 	int v2; // ecx
 	int v3; // eax
 	bool result; // al
 
-	v2 = x;
-	v3 = v2 * 112 + y;
-	if ( dMonster[0][v3] || dPlayer[v2][y] || dItem[v2][y] || dObject[v2][y] || dFlags[v2][y] & 8 )
+	v2 = xp;
+	v3 = v2 * 112 + yp;
+	if ( dMonster[0][v3] || dPlayer[v2][yp] || dItem[v2][yp] || dObject[v2][yp] || dFlags[v2][yp] & 8 )
 		result = 0;
 	else
 		result = nSolidTable[dPiece[0][v3]] == 0;
@@ -732,7 +731,7 @@ void __cdecl InitItems()
 		v0[10] = 0;
 		v0 += 92;
 	}
-	while ( (signed int)v0 < (signed int)&item[128]._ix );
+	while ( (signed int)v0 < (signed int)&item[MAXITEMS+1]._ix );
 	v1 = 0;
 	memset(itemactive, 0, sizeof(itemactive));
 	do
@@ -740,7 +739,7 @@ void __cdecl InitItems()
 		itemavail[v1] = v1;
 		++v1;
 	}
-	while ( v1 < 127 );
+	while ( v1 < MAXITEMS );
 	if ( !setlevel )
 	{
 		GetRndSeed();
@@ -786,7 +785,7 @@ void __fastcall CalcPlrItemVals(int p, bool Loadgfx)
 	int v28; // eax
 	int v29; // ebx
 	int v30; // ecx
-	int v31; // eax
+	unsigned char *v31; // eax
 	int v32; // eax
 	int v33; // ecx
 	int i; // edx
@@ -1608,17 +1607,17 @@ bool __fastcall ItemSpaceOk(int i, int j)
 	v7 = v6 < 0;
 	if ( v6 > 0 )
 	{
-		if ( _LOBYTE(object[v6-1]._oSelFlag) ) /* check */
+		if ( object[v6-1]._oSelFlag ) /* check */
 			return 0;
 		v7 = v6 < 0;
 	}
-	if ( !v7 || !_LOBYTE(object[-(v6 + 1)]._oSelFlag) )
+	if ( !v7 || !object[-(v6 + 1)]._oSelFlag )
 	{
 		v8 = dObject[v2 + 1][j];
 		if ( v8 <= 0 )
 			return nSolidTable[dPiece[0][v3]] == 0;
 		v9 = dObject[v2][j + 1];
-		if ( v9 <= 0 || !_LOBYTE(object[v8-1]._oSelFlag) || !_LOBYTE(object[v9-1]._oSelFlag) )
+		if ( v9 <= 0 || !object[v8-1]._oSelFlag || !object[v9-1]._oSelFlag )
 			return nSolidTable[dPiece[0][v3]] == 0;
 	}
 	return 0;
@@ -1628,11 +1627,11 @@ bool __fastcall GetItemSpace(int x, int y, char inum)
 {
 	int v3; // eax
 	int v4; // edx
-	char (*v5)[3]; // edi
+	int (*v5)[3]; // edi
 	int v6; // ebx
-	char (*v7)[3]; // esi
+	int (*v7)[3]; // esi
 	signed int v9; // esi
-	char (*v10)[3]; // eax
+	int (*v10)[3]; // eax
 	int v11; // ecx
 	int v12; // eax
 	int v14; // ecx
@@ -1642,7 +1641,7 @@ bool __fastcall GetItemSpace(int x, int y, char inum)
 	int v18; // ecx
 	int v19; // [esp+8h] [ebp-Ch]
 	int v20; // [esp+Ch] [ebp-8h]
-	char (*v21)[3]; // [esp+10h] [ebp-4h]
+	int (*v21)[3]; // [esp+10h] [ebp-4h]
 
 	v3 = y;
 	v19 = y;
@@ -1660,15 +1659,15 @@ bool __fastcall GetItemSpace(int x, int y, char inum)
 				v7 = v21;
 				do
 				{
-					*(_DWORD *)v7 = ItemSpaceOk(v6, v4);
-					v7 += 4;
+					(*v7)[0] = ItemSpaceOk(v6, v4);
+					++v7;
 					++v6;
 				}
 				while ( v6 <= v20 + 1 );
 				v3 = v19;
 				x = v20;
 			}
-			v21 = (char (*)[3])((char *)v21 + 4);
+			v21 = (int (*)[3])((char *)v21 + 4);
 			++v4;
 		}
 		while ( v4 <= v3 + 1 );
@@ -1680,17 +1679,16 @@ bool __fastcall GetItemSpace(int x, int y, char inum)
 		v11 = 3;
 		do
 		{
-			if ( *(_DWORD *)v10 )
+			if ( (*v10)[0] )
 				v9 = 1;
-			v10 += 4;
+			++v10;
 			--v11;
 		}
 		while ( v11 );
-		v5 = (char (*)[3])((char *)v5 + 4);
+		v5 = (int (*)[3])((char *)v5 + 4);
 	}
-	while ( (signed int)v5 < (signed int)&itemhold[3][0] );
-	_LOBYTE(v11) = 13;
-	v12 = random(v11, 15) + 1;
+	while ( (signed int)v5 < (signed int)itemhold[1] );
+	v12 = random(13, 15) + 1;
 	if ( !v9 )
 		return 0;
 	v14 = 0;
@@ -1699,7 +1697,7 @@ bool __fastcall GetItemSpace(int x, int y, char inum)
 	{
 		while ( 1 )
 		{
-			if ( *(_DWORD *)&itemhold[0][4 * (v15 + 2 * v14 + v14)] )
+			if ( itemhold[0][v15 + 2 * v14 + v14] )
 				--v12;
 			if ( v12 <= 0 )
 				break;
@@ -1858,8 +1856,7 @@ void __fastcall GetBookSpell(int i, int lvl)
 	v3 = i;
 	if ( !lvl )
 		v2 = lvl + 1;
-	_LOBYTE(i) = 14;
-	v4 = random(i, 37) + 1;
+	v4 = random(14, 37) + 1;
 LABEL_13:
 	v6 = 1;
 	while ( v4 > 0 )
@@ -1918,9 +1915,8 @@ void __fastcall GetStaffPower(int i, int lvl, int bs, unsigned char onlygood)
 
 	v4 = lvl;
 	ia = i;
-	_LOBYTE(i) = 15;
 	v5 = -1;
-	if ( !random(i, 10) || onlygood )
+	if ( !random(15, 10) || onlygood )
 	{
 		v6 = 0;
 		v7 = 0;
@@ -1939,8 +1935,7 @@ void __fastcall GetStaffPower(int i, int lvl, int bs, unsigned char onlygood)
 			while ( PL_Prefix[v7].PLPower != -1 );
 			if ( v6 )
 			{
-				_LOBYTE(v7) = 16;
-				v5 = l[random(v7, v6)];
+				v5 = l[random(16, v6)];
 				v9 = ia;
 				v17 = item[ia]._iIName;
 				sprintf(istr, "%s %s", PL_Prefix[v5].PLName, item[ia]._iIName);
@@ -2111,7 +2106,7 @@ void __fastcall GetItemAttrs(int i, int idata, int lvl)
 		if ( gnDifficulty == DIFF_HELL )
 			rndv = 5 * (currlevel + 32) + random(21, 10 * (currlevel + 32));
 
-		if ( leveltype == 4 )
+		if ( leveltype == DTYPE_HELL )
 			rndv += rndv >> 3;
 		if ( rndv > 5000 )
 			rndv = 5000;
@@ -2729,7 +2724,7 @@ int __fastcall RndItem(int m)
 	int i; // edx
 	int ril[512]; // [esp+4h] [ebp-800h]
 
-	if ( monster[m].MData->mTreasure & 0x8000 )
+	if ( (monster[m].MData->mTreasure & 0x8000) != 0 )
 		return -1 - (monster[m].MData->mTreasure & 0xFFF);
 	if ( monster[m].MData->mTreasure & 0x4000 )
 		return 0;
@@ -2772,7 +2767,7 @@ int __fastcall RndUItem(int m)
 
 	if ( m != -1 )
 	{
-		if ( monster[m].MData->mTreasure < 0 && gbMaxPlayers == 1 )
+		if ( (monster[m].MData->mTreasure & 0x8000) != 0 && gbMaxPlayers == 1 )
 			return -1 - (monster[m].MData->mTreasure & 0xFFF);
 	}
 	ri = 0;
@@ -2963,13 +2958,13 @@ void __fastcall SpawnUnique(int uid, int x, int y)
 	int ii; // esi
 	int itype; // edx
 
-	if ( numitems < 127 )
+	if ( numitems < MAXITEMS )
 	{
 		ii = itemavail[0];
 		GetSuperItemSpace(x, y, itemavail[0]);
 		itype = 0;
 		itemactive[numitems] = ii;
-		itemavail[0] = itemavail[-numitems + 126];
+		itemavail[0] = itemavail[-numitems + 126]; /* MAXITEMS */
 
 		if ( AllItemsList[0].iItemId != UniqueItemList[uid].UIItemId )
 		{
@@ -3062,7 +3057,7 @@ void __fastcall SpawnItem(int m, int x, int y, unsigned char sendmsg)
 	int onlygood; // [esp+Ch] [ebp-Ch]
 	int idx; // [esp+14h] [ebp-4h]
 
-	if ( !monster[m]._uniqtype && (monster[m].MData->mTreasure >= 0 || gbMaxPlayers == 1) )
+	if ( !monster[m]._uniqtype && ((monster[m].MData->mTreasure & 0x8000) == 0 || gbMaxPlayers == 1) )
 	{
 		if ( quests[1]._qactive == 2 && quests[1]._qvar1 == 5 )
 		{
@@ -3088,12 +3083,12 @@ LABEL_10:
 		goto LABEL_10;
 	onlygood = 1;
 LABEL_13:
-	if ( numitems < 127 )
+	if ( numitems < MAXITEMS )
 	{
 		ii = itemavail[0];
 		GetSuperItemSpace(x, y, itemavail[0]);
 		itemactive[numitems] = ii;
-		itemavail[0] = itemavail[-numitems + 126];
+		itemavail[0] = itemavail[-numitems + 126]; /* MAXITEMS */
 
 		if ( !monster[m]._uniqtype )
 			SetupAllItems(ii, idx, GetRndSeed(), monster[m].MData->mLevel, 1, onlygood, 0, 0);
@@ -3112,13 +3107,13 @@ void __fastcall CreateItem(int uid, int x, int y)
 	int ii; // esi
 	int idx; // edx
 
-	if ( numitems < 127 )
+	if ( numitems < MAXITEMS )
 	{
 		ii = itemavail[0];
 		GetSuperItemSpace(x, y, itemavail[0]);
 		idx = 0;
 		itemactive[numitems] = ii;
-		itemavail[0] = itemavail[-numitems + 126];
+		itemavail[0] = itemavail[-numitems + 126]; /* MAXITEMS */
 
 		if ( AllItemsList[0].iItemId != UniqueItemList[uid].UIItemId )
 		{
@@ -3147,12 +3142,12 @@ void __fastcall CreateRndItem(int x, int y, unsigned char onlygood, unsigned cha
 	else
 		idx = RndAllItems();
 
-	if ( numitems < 127 )
+	if ( numitems < MAXITEMS )
 	{
 		ii = itemavail[0];
 		GetSuperItemSpace(x, y, itemavail[0]);
 		itemactive[numitems] = ii;
-		itemavail[0] = itemavail[-numitems + 126];
+		itemavail[0] = itemavail[-numitems + 126]; /* MAXITEMS */
 		SetupAllItems(ii, idx, GetRndSeed(), 2 * currlevel, 1, onlygood, 0, delta);
 
 		if ( sendmsg )
@@ -3187,12 +3182,12 @@ void __fastcall CreateRndUseful(int pnum, int x, int y, unsigned char sendmsg)
 {
 	int ii; // esi
 
-	if ( numitems < 127 )
+	if ( numitems < MAXITEMS )
 	{
 		ii = itemavail[0];
 		GetSuperItemSpace(x, y, itemavail[0]);
 		itemactive[numitems] = ii;
-		itemavail[0] = itemavail[-numitems + 126];
+		itemavail[0] = itemavail[-numitems + 126]; /* MAXITEMS */
 		SetupAllUseful(ii, GetRndSeed(), currlevel);
 
 		if ( sendmsg )
@@ -3212,12 +3207,12 @@ void __fastcall CreateTypeItem(int x, int y, unsigned char onlygood, int itype, 
 	else
 		idx = RndTypeItems(itype, imisc);
 
-	if ( numitems < 127 )
+	if ( numitems < MAXITEMS )
 	{
 		ii = itemavail[0];
 		GetSuperItemSpace(x, y, itemavail[0]);
 		itemactive[numitems] = ii;
-		itemavail[0] = itemavail[-numitems + 126];
+		itemavail[0] = itemavail[-numitems + 126]; /* MAXITEMS */
 		SetupAllItems(ii, idx, GetRndSeed(), 2 * currlevel, 1, onlygood, 0, delta);
 
 		if ( sendmsg )
@@ -3364,14 +3359,14 @@ LABEL_3:
 		}
 	}
 LABEL_13:
-	if ( numitems < 127 )
+	if ( numitems < MAXITEMS )
 	{
 		v12 = itemavail[0];
 		v13 = itemavail[0];
 		item[v13]._ix = x;
 		itemactive[numitems] = v12;
 		item[v13]._iy = y;
-		itemavail[0] = itemavail[-numitems + 126]; /* double check */
+		itemavail[0] = itemavail[-numitems + 126]; /* double check, MAXITEMS */
 		dItem[x][y] = v12 + 1;
 		GetItemAttrs(v12, itemid, currlevel);
 		SetupItem(v12);
@@ -3487,7 +3482,7 @@ void __fastcall DeleteItem(int ii, int i)
 	v2 = numitems - 1;
 	v3 = numitems == 1;
 	v4 = numitems - 1 < 0;
-	itemavail[-numitems + 127] = ii;
+	itemavail[-numitems + MAXITEMS] = ii;
 	numitems = v2;
 	if ( !v4 && !v3 && i != v2 )
 		itemactive[i] = itemactive[v2];
@@ -4516,9 +4511,8 @@ LABEL_41:
 				return;
 			}
 			v10 = p;
-			_LOBYTE(p) = 40;
 			v11 = plr[v10]._pMaxMana >> 8;
-			v12 = (v11 & 0xFFFFFFFE) + 2 * random(p, v11);
+			v12 = (v11 & 0xFFFFFFFE) + 2 * random(40, v11);
 			v13 = plr[v10]._pClass;
 			v14 = 32 * v12;
 			if ( v13 == 2 )
@@ -4543,9 +4537,8 @@ LABEL_41:
 		}
 LABEL_71:
 		v61 = p;
-		_LOBYTE(p) = 39;
 		v62 = plr[v61]._pMaxHP >> 8;
-		v63 = (v62 & 0xFFFFFFFE) + 2 * random(p, v62);
+		v63 = (v62 & 0xFFFFFFFE) + 2 * random(39, v62);
 		v64 = plr[v61]._pClass;
 		v65 = 32 * v63;
 		if ( !v64 )
@@ -4664,9 +4657,8 @@ LABEL_71:
 	else
 	{
 		v42 = p;
-		_LOBYTE(p) = 39;
 		v43 = plr[v42]._pMaxHP >> 8;
-		v44 = (v43 & 0xFFFFFFFE) + 2 * random(p, v43);
+		v44 = (v43 & 0xFFFFFFFE) + 2 * random(39, v43);
 		v45 = plr[v42]._pClass;
 		v46 = 32 * v44;
 		if ( !v45 )
@@ -4685,9 +4677,8 @@ LABEL_71:
 			*v50 = v49;
 		v51 = plr[v42]._pMaxMana >> 8;
 		v52 = plr[v42]._pMaxMana >> 8;
-		_LOBYTE(v49) = 40;
 		drawhpflag = 1;
-		v53 = (v51 & 0xFFFFFFFE) + 2 * random(v49, v52);
+		v53 = (v51 & 0xFFFFFFFE) + 2 * random(40, v52);
 		v54 = plr[v42]._pClass;
 		v55 = 32 * v53;
 		if ( v54 == 2 )
@@ -5512,12 +5503,12 @@ void __fastcall CreateSpellBook(int x, int y, int ispell, bool sendmsg, int delt
 
 	done = 0;
 	idx = RndTypeItems(0, 24);
-	if ( numitems < 127 )
+	if ( numitems < MAXITEMS )
 	{
 		ii = itemavail[0];
 		GetSuperItemSpace(x, y, itemavail[0]);
 		itemactive[numitems] = ii;
-		itemavail[0] = itemavail[-numitems + 126];
+		itemavail[0] = itemavail[-numitems + 126]; /* MAXITEMS */
 		do
 		{
 			SetupAllItems(ii, idx, GetRndSeed(), 2 * currlevel, 1, 1, 0, delta);
@@ -5540,18 +5531,20 @@ void __fastcall CreateMagicItem(int x, int y, int imisc, int icurs, int sendmsg,
 	bool done; // [esp+Ch] [ebp-4h]
 
 	done = 0;
-	idx = RndTypeItems(imisc, 0);
-	if ( numitems < 127 )
+	if ( numitems < MAXITEMS )
 	{
 		ii = itemavail[0];
 		GetSuperItemSpace(x, y, itemavail[0]);
 		itemactive[numitems] = ii;
-		itemavail[0] = itemavail[-numitems + 126];
+		itemavail[0] = itemavail[-numitems + 126]; /* MAXITEMS */
+		idx = RndTypeItems(imisc, 0);
 		do
 		{
 			SetupAllItems(ii, idx, GetRndSeed(), 2 * currlevel, 1, 1, 0, delta);
 			if ( item[ii]._iCurs == icurs )
 				done = 1;
+			else
+				idx = RndTypeItems(imisc, 0);
 		}
 		while ( !done );
 		if ( sendmsg )
@@ -5623,7 +5616,7 @@ void __fastcall SetItemRecord(int dwSeed, int CI, int indx)
 {
 	int i; // ecx
 
-	if ( gnNumGetRecords != 127 )
+	if ( gnNumGetRecords != MAXITEMS )
 	{
 		i = gnNumGetRecords++;
 		itemrecord[i].dwTimestamp = GetTickCount();
